@@ -74,55 +74,43 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#" data-i18n="navbar.brand">Scaledia</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <!-- Articoli -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#articles"><span data-i18n="navbar.articles">Articoli</span></a>
+                        <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-house-door me-1"></i> <span data-i18n="navbar.home">Home</span></a>
                     </li>
-
-                    <!-- Temi -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about"><i class="bi bi-person me-1"></i> <span data-i18n="navbar.about">Chi Sono</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#articles"><i class="bi bi-file-text me-1"></i> <span data-i18n="navbar.articles">Articoli</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#educational-materials"><i class="bi bi-file-earmark-arrow-down me-1"></i> <span data-i18n="educationalMaterials.title">Materiale Didattico</span></a>
+                    </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="topicsDropdown" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            <span data-i18n="navbar.topics">Temi</span>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-grid me-1"></i> <span data-i18n="navbar.categories">Categorie</span>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="topicsDropdown">
-                            <li><a class="dropdown-item" href="#marketing" data-i18n="categories.marketing">Marketing</a></li>
-                            <li><a class="dropdown-item" href="#finance" data-i18n="categories.finance">Finanza</a></li>
-                            <li><a class="dropdown-item" href="#programming" data-i18n="categories.programming">Programmazione</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#marketing"><i class="bi bi-megaphone me-2"></i> <span data-i18n="categories.marketing">Marketing</span></a></li>
+                            <li><a class="dropdown-item" href="#finance"><i class="bi bi-cash-coin me-2"></i> <span data-i18n="categories.finance">Finanza Personale</span></a></li>
+                            <li><a class="dropdown-item" href="#programming"><i class="bi bi-code-slash me-2"></i> <span data-i18n="categories.programming">Programmazione</span></a></li>
                         </ul>
                     </li>
-
-                    <!-- Risorse -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#educational-materials"><span data-i18n="navbar.resources">Risorse</span></a>
+                        <a class="nav-link" href="#newsletter"><i class="bi bi-envelope me-1"></i> <span data-i18n="navbar.newsletter">Newsletter</span></a>
                     </li>
-
-                    <!-- Chi sono -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about"><span data-i18n="navbar.about">Chi Sono</span></a>
-                    </li>
-
-                    <!-- Newsletter -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="#newsletter"><span data-i18n="navbar.newsletter">Newsletter</span></a>
-                    </li>
-
-                    <!-- Lingua -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            <span data-i18n="navbar.language">Lingua</span>
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-globe"></i> <span data-i18n="navbar.language">Lingua</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-                            <li><a class="dropdown-item" href="#"><span class="flag-icon flag-icon-it me-2"></span>Italiano</a></li>
-                            <li><a class="dropdown-item" href="#"><span class="flag-icon flag-icon-gb me-2"></span>English</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item active" href="#"><span class="flag-icon flag-icon-it" aria-hidden="true"></span>Italiano</a></li>
+                            <li><a class="dropdown-item" href="#"><span class="flag-icon flag-icon-gb" aria-hidden="true"></span>English</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -223,72 +211,20 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
-                    <h2 class="mb-4 section-title text-center">
-                        <i class="bi bi-envelope-paper me-2"></i>
-                        <span data-i18n="newsletter.title">Iscriviti alla Newsletter</span>
-                    </h2>
-
-                    <p class="lead mb-5" data-i18n="newsletter.description">
-                        Ricevi aggiornamenti sui nuovi articoli e contenuti esclusivi direttamente nella tua casella di posta.
-                    </p>
-
-                    <form
-                            method="POST"
-                            action="https://973b28e0.sibforms.com/serve/MUIFAG1RDxrfwdr55vjTzuy0Pu1DXTF7DSlMYSBxE8xIPH3RIBIEeMe9facyLuZ_PsEw_prfvRFIHl_fWJHOpTOgC5ZgYdggklmnNp1resoFCjvwNfuvIEVkj2zrZDZT4EGG_-isjy__ouRdcFmV_7u03_JqTJPNlf7iZSB9q--IyyetHwQWIpRf7MP7CDRrONLyBYDc0qrcGLtV"
-                            class="row g-4 justify-content-center"
-                    >
+                    <h2 class="mb-4 section-title text-center"><i class="bi bi-envelope-paper me-2"></i><span data-i18n="newsletter.title">Iscriviti alla Newsletter</span></h2>
+                    <p class="lead mb-5" data-i18n="newsletter.description">Ricevi aggiornamenti sui nuovi articoli e contenuti esclusivi direttamente nella tua casella di posta.</p>
+                    <form class="row g-4 justify-content-center">
                         <div class="col-md-8">
-                            <label for="EMAIL" class="visually-hidden">Email</label>
-                            <input
-                                    type="email"
-                                    id="EMAIL"
-                                    name="EMAIL"
-                                    class="form-control form-control-lg bg-white text-dark"
-                                    placeholder="La tua email"
-                                    data-i18n="[placeholder]newsletter.placeholder"
-                                    required
-                            />
+                            <input type="email" class="form-control form-control-lg" data-i18n="[placeholder]newsletter.placeholder" placeholder="La tua email" required>
                         </div>
-
                         <div class="col-md-4">
-                            <button type="submit" class="btn btn-light btn-lg w-100">
-                                <i class="bi bi-send me-2"></i>
-                                <span data-i18n="newsletter.button">Iscriviti</span>
-                            </button>
+                            <button type="submit" class="btn btn-light btn-lg w-100"><i class="bi bi-send me-2"></i><span data-i18n="newsletter.button">Iscriviti</span></button>
                         </div>
-
-                        <!-- Accettazione GDPR -->
-                        <div class="col-12 text-start">
-                            <div class="form-check">
-                                <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        name="OPT_IN"
-                                        id="OPT_IN"
-                                        value="1"
-                                        required
-                                />
-                                <label class="form-check-label text-white" for="OPT_IN" data-i18n="newsletter.privacyConsent">
-                                    Accetto le condizioni generali e di ricevere le newsletter
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Hidden fields -->
-                        <input type="hidden" name="email_address_check" value="" />
-                        <input type="hidden" name="locale" id="brevo-locale" value="it" />
-                        <input type="hidden" name="html_type" value="simple" />
                     </form>
-
-                    <!-- Dichiarazione GDPR -->
-                    <div class="mt-4 text-white-50 small" style="font-size: 0.9rem;" data-i18n="newsletter.disclaimer">
-                        Utilizziamo Brevo come piattaforma di marketing. Inviando questo modulo, accetti che i tuoi dati vengano trattati secondo <a href="https://www.brevo.com/it/legal/privacypolicy/" class="text-white text-decoration-underline" target="_blank">l'informativa sulla privacy di Brevo</a>.
-                    </div>
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- All Articles Section -->
     <section id="articles" class="py-6">
@@ -530,8 +466,8 @@
                 <div class="col-md-4">
                     <h5 class="section-title mb-4" data-i18n="footer.contacts">Contatti</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-3"><i class="bi bi-envelope me-2"></i> crescenzo.sorrentino@icloud.com</li>
-                        <li class="mb-3"><i class="bi bi-telephone me-2"></i> +39 *** ** ** ***</li>
+                        <li class="mb-3"><i class="bi bi-envelope me-2"></i> ??</li>
+                        <li class="mb-3"><i class="bi bi-telephone me-2"></i> +39 ??</li>
                         <li class="mb-4"><i class="bi bi-geo-alt me-2"></i> Napoli, Italia</li>
                     </ul>
                     <div class="social-icons">
