@@ -211,15 +211,38 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
-                    <h2 class="mb-4 section-title text-center"><i class="bi bi-envelope-paper me-2"></i><span data-i18n="newsletter.title">Iscriviti alla Newsletter</span></h2>
-                    <p class="lead mb-5" data-i18n="newsletter.description">Ricevi aggiornamenti sui nuovi articoli e contenuti esclusivi direttamente nella tua casella di posta.</p>
-                    <form class="row g-4 justify-content-center">
+                    <h2 class="mb-4 section-title text-center">
+                        <i class="bi bi-envelope-paper me-2"></i>
+                        <span data-i18n="newsletter.title">Iscriviti alla Newsletter</span>
+                    </h2>
+
+                    <p class="lead mb-5" data-i18n="newsletter.description">
+                        Ricevi aggiornamenti sui nuovi articoli e contenuti esclusivi direttamente nella tua casella di posta.
+                    </p>
+
+                    <!-- Brevo Signup Form -->
+                    <form action="https://973b28e0.sibforms.com/serve/MUIFABaaLBFjYHn1veC1mvgv8pvJyW_fQZuhn6E-k7CmsWWgQv03nSYSSTisNJcC-WY9WKx3Txoii84jQbf5HDTrv6QuOgVw4Tuh6UhCSHH0QtYWECXd-GC892yF09Zyzy7YVT3usPfv7ZGfNdB87TRFXruzpifpBMLRcoX_dMzOrlzrsW18UejoRaJIFu7oiDI7VoeIfKcVU1nz"
+                          method="POST"
+                          target="_blank"
+                          class="row g-4 justify-content-center"
+                          novalidate>
+
                         <div class="col-md-8">
-                            <input type="email" class="form-control form-control-lg" data-i18n="[placeholder]newsletter.placeholder" placeholder="La tua email" required>
+                            <input type="email"
+                                   name="EMAIL"
+                                   class="form-control form-control-lg"
+                                   data-i18n="[placeholder]newsletter.placeholder"
+                                   placeholder="La tua email"
+                                   required>
                         </div>
+
                         <div class="col-md-4">
-                            <button type="submit" class="btn btn-light btn-lg w-100"><i class="bi bi-send me-2"></i><span data-i18n="newsletter.button">Iscriviti</span></button>
+                            <button type="submit" class="btn btn-light btn-lg w-100">
+                                <i class="bi bi-send me-2"></i>
+                                <span data-i18n="newsletter.button">Iscriviti</span>
+                            </button>
                         </div>
+
                     </form>
                 </div>
             </div>
