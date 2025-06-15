@@ -1,16 +1,16 @@
 {
   "navbar": {
     "brand": "Scaledia",
+    "home": "Home",
+    "about": "About Me",
     "articles": "Articles",
-    "topics": "Topics",
-    "resources": "Resources",
-    "about": "About",
+    "categories": "Categories",
     "newsletter": "Newsletter",
     "language": "Language"
   },
   "categories": {
     "marketing": "Marketing",
-    "finance": "Finance",
+    "finance": "Personal Finance",
     "programming": "Programming"
   },
   "hero": {
