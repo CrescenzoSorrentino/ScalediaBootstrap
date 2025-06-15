@@ -1,16 +1,16 @@
 {
   "navbar": {
     "brand": "Scaledia",
-    "home": "Home",
-    "about": "About Me",
     "articles": "Articles",
-    "categories": "Categories",
+    "topics": "Topics",
+    "resources": "Resources",
+    "about": "About",
     "newsletter": "Newsletter",
     "language": "Language"
   },
   "categories": {
     "marketing": "Marketing",
-    "finance": "Personal Finance",
+    "finance": "Finance",
     "programming": "Programming"
   },
   "hero": {
@@ -34,7 +34,9 @@
     "title": "Subscribe to the Newsletter",
     "description": "Receive updates on new articles and exclusive content directly in your inbox.",
     "placeholder": "Your email",
-    "button": "Subscribe"
+    "button": "Subscribe",
+    "privacyConsent": "I accept the terms and agree to receive the newsletter",
+    "disclaimer": "We use Brevo as our marketing platform. By submitting this form, you agree that your data will be processed according to Brevo's privacy policy."
   },
   "allArticles": {
     "title": "All Articles",
