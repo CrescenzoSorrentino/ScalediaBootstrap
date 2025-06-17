@@ -128,41 +128,45 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="../index.html" data-i18n="navbar.brand">Il Mio Blog</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="../index.html" data-i18n="navbar.brand">Scaledia</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.html"><i class="bi bi-house-door me-1"></i> <span data-i18n="navbar.home">Home</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html#about"><i class="bi bi-person me-1"></i> <span data-i18n="navbar.about">Chi Sono</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../index.html#articles"><i class="bi bi-file-text me-1"></i> <span data-i18n="navbar.articles">Articoli</span></a>
+                        <a class="nav-link" href="../index.html#articles"><span data-i18n="navbar.articles">Articoli</span></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-grid me-1"></i> <span data-i18n="navbar.categories">Categorie</span>
+                        <a class="nav-link dropdown-toggle" href="#" id="topicsDropdown" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <span data-i18n="navbar.topics">Temi</span>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="../index.html#marketing"><i class="bi bi-megaphone me-2"></i> <span data-i18n="categories.marketing">Marketing</span></a></li>
-                            <li><a class="dropdown-item" href="../index.html#finance"><i class="bi bi-cash-coin me-2"></i> <span data-i18n="categories.finance">Finanza Personale</span></a></li>
-                            <li><a class="dropdown-item" href="../index.html#programming"><i class="bi bi-code-slash me-2"></i> <span data-i18n="categories.programming">Programmazione</span></a></li>
+                        <ul class="dropdown-menu" aria-labelledby="topicsDropdown">
+                            <li><a class="dropdown-item" href="../index.html#marketing" data-i18n="categories.marketing">Marketing</a></li>
+                            <li><a class="dropdown-item" href="../index.html#finance" data-i18n="categories.finance">Finanza</a></li>
+                            <li><a class="dropdown-item" href="../index.html#programming" data-i18n="categories.programming">Programmazione</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.html#newsletter"><i class="bi bi-envelope me-1"></i> <span data-i18n="navbar.newsletter">Newsletter</span></a>
+                        <a class="nav-link" href="../index.html#educational-materials"><span data-i18n="navbar.resources">Risorse</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html#about"><span data-i18n="navbar.about">Chi Sono</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html#newsletter"><span data-i18n="navbar.newsletter">Newsletter</span></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-globe"></i> <span data-i18n="navbar.language">Lingua</span>
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <span data-i18n="navbar.language">Lingua</span>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                            <li><a class="dropdown-item active" href="#"><span class="flag-icon flag-icon-it" aria-hidden="true"></span>Italiano</a></li>
-                            <li><a class="dropdown-item" href="#"><span class="flag-icon flag-icon-gb" aria-hidden="true"></span>English</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item" href="#"><span class="flag-icon flag-icon-it me-2"></span>Italiano</a></li>
+                            <li><a class="dropdown-item" href="#"><span class="flag-icon flag-icon-gb me-2"></span>English</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -432,37 +436,37 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 mb-5 mb-md-0">
-                    <h5 class="section-title mb-4" data-i18n="navbar.brand">Il Mio Blog</h5>
+                    <h5 class="section-title mb-4" data-i18n="navbar.brand">Scaledia</h5>
                     <p class="mb-0" data-i18n="footer.description">Un blog dedicato al marketing, alla finanza personale e alla programmazione. Condivido conoscenze ed esperienze per aiutarti a crescere in questi ambiti.</p>
                 </div>
                 <div class="col-md-4 mb-5 mb-md-0">
                     <h5 class="section-title mb-4" data-i18n="footer.usefulLinks">Link Utili</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-3"><a href="../index.html" class="text-white text-decoration-none"><i class="bi bi-house-door me-2"></i><span data-i18n="navbar.home">Home</span></a></li>
+                        <li class="mb-3"><a href="#" class="text-white text-decoration-none"><i class="bi bi-house-door me-2"></i><span data-i18n="navbar.home">Home</span></a></li>
                         <li class="mb-3"><a href="../index.html#about" class="text-white text-decoration-none"><i class="bi bi-person me-2"></i><span data-i18n="navbar.about">Chi Sono</span></a></li>
                         <li class="mb-3"><a href="../index.html#articles" class="text-white text-decoration-none"><i class="bi bi-file-text me-2"></i><span data-i18n="navbar.articles">Articoli</span></a></li>
+                        <li class="mb-3"><a href="../index.html#educational-materials" class="text-white text-decoration-none"><i class="bi bi-file-earmark-arrow-down me-2"></i><span data-i18n="educationalMaterials.title">Materiale Didattico</span></a></li>
                         <li class="mb-3"><a href="../index.html#newsletter" class="text-white text-decoration-none"><i class="bi bi-envelope me-2"></i><span data-i18n="navbar.newsletter">Newsletter</span></a></li>
-                        <li class="mb-3"><a href="#" class="text-white text-decoration-none"><i class="bi bi-shield-lock me-2"></i><span data-i18n="footer.privacyPolicy">Privacy Policy</span></a></li>
+                        <li class="mb-3"><a href="#" class="text-white text-decoration-none iubenda-nostyle no-brand iubenda-embed iubenda-noiframe" title="Privacy Policy"><i class="bi bi-shield-lock me-2"></i><span data-i18n="footer.privacyPolicy">Privacy Policy</span></a></li>
+                        <li class="mb-3"><a href="#" class="text-white text-decoration-none iubenda-nostyle no-brand iubenda-embed iubenda-noiframe" title="Cookie Policy"><i class="bi bi-cookie me-2"></i><span data-i18n="footer.cookiePolicy">Cookie Policy</span></a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h5 class="section-title mb-4" data-i18n="footer.contacts">Contatti</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-3"><i class="bi bi-envelope me-2"></i> info@mioblog.com</li>
-                        <li class="mb-3"><i class="bi bi-telephone me-2"></i> +39 123 456 7890</li>
-                        <li class="mb-4"><i class="bi bi-geo-alt me-2"></i> Milano, Italia</li>
+                        <li class="mb-3"><i class="bi bi-envelope me-2"></i> crescenzo.sorrentino@icloud.com</li>
+                        <li class="mb-3"><i class="bi bi-telephone me-2"></i> +39 *** ** ** ***</li>
+                        <li class="mb-4"><i class="bi bi-geo-alt me-2"></i> Napoli, Italia</li>
                     </ul>
                     <div class="social-icons">
-                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.facebook.com/share/18wrecFjLP/?mibextid=wwXIfr" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                        <!--              <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>        -->
                     </div>
                 </div>
             </div>
             <hr class="my-5">
             <div class="text-center">
-                <p class="mb-0" data-i18n="footer.copyright">&copy; 2023 Il Mio Blog. Tutti i diritti riservati.</p>
+                <p class="mb-0" data-i18n="footer.copyright">&copy; 2025 Scaledia. Tutti i diritti riservati.</p>
             </div>
         </div>
     </footer>
