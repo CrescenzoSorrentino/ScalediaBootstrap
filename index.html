@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <!-- Google Analytics (GDPR Compliant) -->
+    <script type="text/plain" data-cookieconsent="analytics" async src="https://www.googletagmanager.com/gtag/js?id=G-50TEXSN8V2"></script>
+    <script type="text/plain" data-cookieconsent="analytics">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-50TEXSN8V2', { 'anonymize_ip': true, 'send_page_view': false });
+    </script>
+    <!-- /Google Analytics GDPR -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog di Marketing, Finanza Personale e Programmazione</title>
@@ -351,13 +363,15 @@
                         </div>
 
                         <!-- AB Test Article -->
+                        <!-- AB Test Article -->
                         <div class="col-md-6 col-lg-4 mb-4 px-3">
-                            <div class="card h-100">
+                            <div class="card h-100 position-relative">
                                 <img src="images/placeholder.jpg" class="card-img-top" alt="AB Test Article">
                                 <div class="card-body">
                                     <span class="badge bg-primary mb-3" data-i18n="categories.marketing">Marketing</span>
                                     <h5 class="card-title" data-i18n="cards.abTest.title">AB Test</h5>
                                     <p class="card-text" data-i18n="cards.abTest.description">Guida completa ai test A/B: come implementarli, analizzare i risultati e ottimizzare le conversioni del tuo sito web.</p>
+                                    <p class="text-muted small"><i class="bi bi-clock me-1"></i> 3 min read</p>
                                 </div>
                                 <div class="card-footer bg-white border-0">
                                     <a href="articles/ab-test.html" class="btn btn-outline-primary" data-i18n="featuredArticles.readMore">Leggi di più</a>
@@ -570,6 +584,15 @@
             else{w.onload = loader;}
         })(window, document);
     </script>
+
+    <script type="text/javascript">
+        _iub.cs.api.callConsentGivenCallback(function(){
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view');
+            }
+        });
+    </script>
+
     <script type="text/javascript">
         // Replace these IDs with your actual Iubenda policy IDs
         var privacyPolicyId = '16452539';
