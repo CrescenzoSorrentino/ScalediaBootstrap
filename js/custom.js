@@ -388,7 +388,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const pubDate = new Date(`${year}-${month}-${day}T00:00:00`);
             const diff = now - pubDate;
             let badge = card.querySelector('.card-badge-new');
-            if (diff <= twoWeeksMs) {
+            const hasRecommended = card.querySelector('.card-badge-recommended') || card.getAttribute('data-recommended') === 'true';
+
+            if (diff <= twoWeeksMs && !hasRecommended) {
                 if (!badge) {
                     badge = document.createElement('div');
                     badge.className = 'card-badge card-badge-new';
