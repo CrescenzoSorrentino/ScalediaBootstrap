@@ -419,6 +419,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+    const updateRecommendedBadges = () => {
+        const recommendedCards = document.querySelectorAll('.card[data-recommended="true"]');
+        recommendedCards.forEach(card => {
+            if (!card.querySelector('.card-badge-recommended')) {
+                const badge = document.createElement('div');
+                badge.className = 'card-badge card-badge-recommended';
+                badge.setAttribute('data-i18n', 'featuredArticles.recommended');
+                badge.textContent = (typeof i18next !== 'undefined') ? i18next.t('featuredArticles.recommended') : 'Consigliato';
+                card.prepend(badge);
+            }
+        });
+    };
+
     const populateFeaturedArticles = () => {
         const featuredContainer = document.querySelector('#featured-articles .row');
         const sourceCards = document.querySelectorAll('#all .card');
@@ -448,6 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateArticleReadingTime();
     updateCardReadingTimes();
+    updateRecommendedBadges();
     updateNewBadges();
     populateFeaturedArticles();
 });
