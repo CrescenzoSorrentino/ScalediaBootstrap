@@ -71,6 +71,11 @@
   },
   "backToTop": "Torna in cima",
   "readingTime": "Tempo di lettura: {{time}} min",
+  "notFound": {
+    "title": "Pagina non trovata",
+    "message": "Spiacenti, la pagina che cerchi non esiste.",
+    "back": "Torna alla home"
+  },
   "cards": {
     "creditCards": {
       "title": "Carte di Credito",
