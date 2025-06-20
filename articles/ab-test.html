@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <!-- Google Analytics (GDPR Compliant) -->
+    <script type="text/plain" data-cookieconsent="analytics" async src="https://www.googletagmanager.com/gtag/js?id=G-50TEXSN8V2"></script>
+    <script type="text/plain" data-cookieconsent="analytics">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-50TEXSN8V2', { 'anonymize_ip': true, 'send_page_view': false });
+    </script>
+    <!-- /Google Analytics GDPR -->
+
+    <!-- Google Tag Manager -->
+    <script type="text/plain" data-cookieconsent="analytics">
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id=GTM-PXVN2GTW'+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PXVN2GTW');
+    </script>
+    <!-- Fine Google Tag Manager -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="cards.abTest.title">Test A/B</title>
@@ -434,5 +456,44 @@
 
     <!-- Custom JavaScript -->
     <script src="../js/custom.js"></script>
+
+    <!-- Iubenda Privacy Policy and Cookie Policy Scripts -->
+    <script type="text/javascript">
+        (function (w,d) {
+            var loader = function () {
+                var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0];
+                s.src = "https://cdn.iubenda.com/iubenda.js";
+                tag.parentNode.insertBefore(s,tag);
+            };
+            if(w.addEventListener){w.addEventListener("load", loader, false);} else if(w.attachEvent){w.attachEvent("onload", loader);} else{w.onload = loader;}
+        })(window, document);
+    </script>
+
+    <script type="text/javascript">
+        _iub.cs.api.callConsentGivenCallback(function(){
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view');
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        // Replace these IDs with your actual Iubenda policy IDs
+        var privacyPolicyId = '16452539';
+        var cookiePolicyId = '16452539';
+
+        // Update privacy policy link
+        document.addEventListener('DOMContentLoaded', function() {
+            var privacyLinks = document.querySelectorAll('a[title="Privacy Policy"]');
+            for (var i = 0; i < privacyLinks.length; i++) {
+                privacyLinks[i].setAttribute('href', 'https://www.iubenda.com/privacy-policy/' + privacyPolicyId);
+            }
+
+            var cookieLinks = document.querySelectorAll('a[title="Cookie Policy"]');
+            for (var i = 0; i < cookieLinks.length; i++) {
+                cookieLinks[i].setAttribute('href', 'https://www.iubenda.com/privacy-policy/' + cookiePolicyId + '/cookie-policy');
+            }
+        });
+    </script>
 </body>
 </html>
