@@ -9,18 +9,25 @@
     <meta name="description" content="Scopri il modello AIDA e come applicarlo alle tue strategie di marketing per catturare l'attenzione e convertire i clienti.">
     <link rel="canonical" href="https://scaledia.net/articles/aida-model.html">
     <title data-i18n="cards.aidaModel.title">Modello AIDA</title>
+    <!-- Preload CSS -->
+    <link rel="preload" href="../css/bootstrap.min.css" as="style">
+    <link rel="preload" href="../css/style.css" as="style">
+    <link rel="preload" href="../css/flags.css" as="style">
     <!-- Bootstrap CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
     <!-- Custom CSS -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Flag Icons CSS -->
-    <link href="../css/flags.css" rel="stylesheet">
+    <link href="../css/flags.css" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Iubenda Cookie Banner Configuration -->
     <script type="text/javascript">
         function getSelectedLanguage() {
@@ -518,23 +525,26 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script defer src="../js/bootstrap.bundle.min.js"></script>
-
-    <!-- jQuery (necessario per jqueryI18next) -->
-    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Librerie i18next -->
-    <script defer src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.2/i18nextHttpBackend.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
-
-    <!-- Il tuo file di configurazione i18n -->
-    <script defer src="../js/i18n.js"></script>
-
-    <!-- Custom JavaScript -->
-    <script defer src="../js/custom.js"></script>
+    <script>
+    window.addEventListener('load', function() {
+      var scripts = [
+        '../js/bootstrap.bundle.min.js',
+        'https://code.jquery.com/jquery-3.6.0.min.js',
+        'https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js',
+        'https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.2/i18nextHttpBackend.min.js',
+        'https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js',
+        'https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js',
+        '../js/i18n.js',
+        '../js/custom.js'
+      ];
+      scripts.forEach(function(src) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.defer = true;
+        document.body.appendChild(s);
+      });
+    });
+    </script>
 
     <!-- Iubenda Privacy Policy and Cookie Policy Scripts -->
     <script type="text/javascript">
