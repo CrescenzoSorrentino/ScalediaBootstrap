@@ -448,6 +448,11 @@
         animateCards();
     };
 
+    document.addEventListener('localized', () => {
+        updateArticleReadingTime();
+        updateCardReadingTimes();
+    });
+
     updateArticleReadingTime();
     updateCardReadingTimes();
     updateRecommendedBadges();
