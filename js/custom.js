@@ -377,6 +377,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+    const updateRecommendedBadges = (scope = document) => {
+        const cards = scope.querySelectorAll('.card[data-recommended="true"]');
+        cards.forEach(card => {
+            if (!card.querySelector('.card-badge-recommended')) {
+                const badge = document.createElement('div');
+                badge.className = 'card-badge card-badge-recommended';
+                badge.setAttribute('data-i18n', 'featuredArticles.recommended');
+                badge.textContent = (typeof i18next !== 'undefined') ? i18next.t('featuredArticles.recommended') : 'Consigliato';
+                card.prepend(badge);
+            }
+        });
+    };
+
     const updateNewBadges = (scope = document) => {
         const now = new Date();
         const twoWeeksMs = 14 * 24 * 60 * 60 * 1000;
@@ -442,6 +455,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateArticleReadingTime();
     updateCardReadingTimes();
+    updateRecommendedBadges();
     updateNewBadges();
     populateFeaturedArticles();
 });
