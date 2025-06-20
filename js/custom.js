@@ -394,6 +394,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+    const updateNewBadges = () => {
+        const now = new Date();
+        const twoWeeksMs = 14 * 24 * 60 * 60 * 1000;
+        const cards = document.querySelectorAll('.card[data-pubdate]');
+        cards.forEach(card => {
+            const dateStr = card.getAttribute('data-pubdate');
+            if (!dateStr) return;
+            const [day, month, year] = dateStr.split('/');
+            const pubDate = new Date(`${year}-${month}-${day}T00:00:00`);
+            const diff = now - pubDate;
+            let badge = card.querySelector('.card-badge-new');
+            if (diff <= twoWeeksMs) {
+                if (!badge) {
+                    badge = document.createElement('div');
+                    badge.className = 'card-badge card-badge-new';
+                    badge.setAttribute('data-i18n', 'featuredArticles.new');
+                    badge.textContent = (typeof i18next !== 'undefined') ? i18next.t('featuredArticles.new') : 'Nuovo';
+                    card.prepend(badge);
+                }
+            } else if (badge) {
+                badge.remove();
+            }
+        });
+    };
+
     updateArticleReadingTime();
     updateCardReadingTimes();
+    updateNewBadges();
 });
