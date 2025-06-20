@@ -328,3 +328,57 @@ document.addEventListener('DOMContentLoaded', function() {
     // Run the animation
     animateCards();
 });
+    // Run the animation
+    animateCards();
+
+    // Calculate reading time based on word count
+    const calculateReadingTime = (text) => {
+        const wordsPerMinute = 200;
+        const words = text.trim().split(/\s+/).length;
+        return Math.max(1, Math.ceil(words / wordsPerMinute));
+    };
+
+    const updateArticleReadingTime = () => {
+        const articleBody = document.querySelector('.article-body');
+        const readingTimeSpan = document.querySelector('.article-meta span[data-i18n="readingTime"]');
+        if (articleBody && readingTimeSpan) {
+            const minutes = calculateReadingTime(articleBody.textContent);
+            readingTimeSpan.setAttribute('data-i18n-options', JSON.stringify({ time: minutes }));
+            if (typeof i18next !== 'undefined') {
+                readingTimeSpan.textContent = i18next.t('readingTime', { time: minutes });
+            } else {
+                readingTimeSpan.textContent = `Tempo di lettura: ${minutes} min`;
+            }
+        }
+    };
+
+    const updateCardReadingTimes = () => {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            const link = card.querySelector('.card-footer a[href]');
+            const timeSpan = card.querySelector('.reading-time span');
+            if (link && timeSpan) {
+                fetch(link.getAttribute('href'))
+                    .then(res => res.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const body = doc.querySelector('.article-body');
+                        if (body) {
+                            const minutes = calculateReadingTime(body.textContent);
+                            timeSpan.setAttribute('data-i18n-options', JSON.stringify({ time: minutes }));
+                            if (typeof i18next !== 'undefined') {
+                                timeSpan.textContent = i18next.t('readingTime', { time: minutes });
+                            } else {
+                                timeSpan.textContent = `Tempo di lettura: ${minutes} min`;
+                            }
+                        }
+                    })
+                    .catch(err => console.error('Reading time fetch failed:', err));
+            }
+        });
+    };
+
+    updateArticleReadingTime();
+    updateCardReadingTimes();
+});
