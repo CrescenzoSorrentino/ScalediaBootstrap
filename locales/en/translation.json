@@ -71,6 +71,11 @@
   },
   "backToTop": "Back to Top",
   "readingTime": "Reading time: {{time}} min",
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "Sorry, the page you are looking for doesn't exist.",
+    "back": "Go back to the homepage"
+  },
   "cards": {
     "creditCards": {
       "title": "Credit Cards",
