@@ -105,6 +105,11 @@ document.addEventListener('DOMContentLoaded', function() {
           useOptionsAttr: true
         });
 
+        // Keep the <html> lang attribute in sync with the active language
+        i18next.on('languageChanged', function(lng) {
+          document.documentElement.lang = lng;
+        });
+
         // Check if language is already set in localStorage
         const savedLanguage = localStorage.getItem('selectedLanguage');
 
