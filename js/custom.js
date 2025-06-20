@@ -327,9 +327,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Run the animation
     animateCards();
-});
-    // Run the animation
-    animateCards();
 
     // Calculate reading time based on word count
     const calculateReadingTime = (text) => {
@@ -352,29 +349,47 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
+    const predefinedReadingTimes = {
+        'articles/ab-test.html': 8,
+        'articles/aida-model.html': 9,
+        'articles/article-template.html': 2,
+        'articles/credit-cards.html': 6,
+        'articles/duolingo-case.html': 7,
+        'articles/marketing-glossary.html': 9
+    };
+
+    const setReadingTime = (element, minutes) => {
+        element.setAttribute('data-i18n-options', JSON.stringify({ time: minutes }));
+        if (typeof i18next !== 'undefined') {
+            element.textContent = i18next.t('readingTime', { time: minutes });
+        } else {
+            element.textContent = `Tempo di lettura: ${minutes} min`;
+        }
+    };
+
     const updateCardReadingTimes = () => {
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
             const link = card.querySelector('.card-footer a[href]');
             const timeSpan = card.querySelector('.reading-time span');
             if (link && timeSpan) {
-                fetch(link.getAttribute('href'))
-                    .then(res => res.text())
-                    .then(html => {
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, 'text/html');
-                        const body = doc.querySelector('.article-body');
-                        if (body) {
-                            const minutes = calculateReadingTime(body.textContent);
-                            timeSpan.setAttribute('data-i18n-options', JSON.stringify({ time: minutes }));
-                            if (typeof i18next !== 'undefined') {
-                                timeSpan.textContent = i18next.t('readingTime', { time: minutes });
-                            } else {
-                                timeSpan.textContent = `Tempo di lettura: ${minutes} min`;
+                const href = link.getAttribute('href');
+                if (predefinedReadingTimes[href]) {
+                    setReadingTime(timeSpan, predefinedReadingTimes[href]);
+                } else {
+                    fetch(href)
+                        .then(res => res.text())
+                        .then(html => {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+                            const body = doc.querySelector('.article-body');
+                            if (body) {
+                                const minutes = calculateReadingTime(body.textContent);
+                                setReadingTime(timeSpan, minutes);
                             }
-                        }
-                    })
-                    .catch(err => console.error('Reading time fetch failed:', err));
+                        })
+                        .catch(err => console.error('Reading time fetch failed:', err));
+                }
             }
         });
     };
