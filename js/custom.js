@@ -424,7 +424,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     clone.prepend(badge);
                 }
 
-                featuredContainer.appendChild(clone);
+                const col = document.createElement('div');
+                col.className = 'col-md-6 col-lg-4 mb-4 px-3';
+                col.appendChild(clone);
+                featuredContainer.appendChild(col);
             }
         });
 
