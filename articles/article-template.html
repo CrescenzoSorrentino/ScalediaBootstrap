@@ -38,6 +38,48 @@
     <link href="../css/style.css" rel="stylesheet">
     <!-- Flag Icons CSS -->
     <link href="../css/flags.css" rel="stylesheet">
+    <!-- Iubenda Cookie Banner Configuration -->
+    <script type="text/javascript">
+        function getSelectedLanguage() {
+            var storedLang = localStorage.getItem('selectedLanguage');
+            if (storedLang) return storedLang;
+            if (typeof i18next !== 'undefined' && i18next.language) return i18next.language;
+            return 'it';
+        }
+
+        var _iub = _iub || [];
+        _iub.csConfiguration = {
+            cookiePolicyId: 16452539,
+            siteId: 4019868,
+            lang: getSelectedLanguage(),
+            countryDetection: true,
+            enableLgpd: true,
+            enableUspr: true,
+            googleConsentMode: true,
+            googleTagManager: { containerId: 'GTM-PXVN2GTW' },
+            googleAnalytics: { measurementId: 'G-50TEXSN8V2' },
+            banner: {
+                acceptButtonDisplay: true,
+                customizeButtonDisplay: true,
+                position: "float-bottom-center",
+                rejectButtonDisplay: true
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof i18next !== 'undefined') {
+                i18next.on('languageChanged', function(lang) {
+                    if (_iub.csConfiguration) {
+                        _iub.csConfiguration.lang = lang;
+                        if (typeof _iub.cs !== 'undefined' && typeof _iub.cs.reload === 'function') {
+                            _iub.cs.reload();
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+    <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
 </head>
 <body>
     <!-- Navbar -->
