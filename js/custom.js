@@ -323,31 +323,12 @@
     };
 
     const updateArticleReadingTime = () => {
+        const articleBody = document.querySelector('.article-body');
         const readingTimeSpan = document.querySelector('.article-meta span[data-i18n="readingTime"]');
-        if (!readingTimeSpan) return;
-
-        const path = window.location.pathname.replace(/^\/+/, '');
-        let minutes = predefinedReadingTimes[path];
-
-        if (!minutes) {
-            const articleBody = document.querySelector('.article-body');
-            if (articleBody) {
-                minutes = calculateReadingTime(articleBody.textContent);
-            }
-        }
-
-        if (minutes) {
+        if (articleBody && readingTimeSpan) {
+            const minutes = calculateReadingTime(articleBody.textContent);
             setReadingTime(readingTimeSpan, minutes);
         }
-    };
-
-    const predefinedReadingTimes = {
-        'articles/ab-test.html': 8,
-        'articles/aida-model.html': 9,
-        'articles/article-template.html': 2,
-        'articles/credit-cards.html': 6,
-        'articles/duolingo-case.html': 7,
-        'articles/marketing-glossary.html': 9
     };
 
     const setReadingTime = (element, minutes) => {
@@ -359,29 +340,34 @@
         }
     };
 
+    const fetchReadingTime = (href) => {
+        return fetch(href)
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const body = doc.querySelector('.article-body');
+                if (body) {
+                    return calculateReadingTime(body.textContent);
+                }
+            })
+            .catch(err => {
+                console.error('Reading time fetch failed:', err);
+                return null;
+            });
+    };
+
     const updateCardReadingTimes = (scope = document) => {
         const cards = scope.querySelectorAll('.card');
         cards.forEach(card => {
             const link = card.querySelector('.card-footer a[href]');
             const timeSpan = card.querySelector('.reading-time span');
             if (link && timeSpan) {
-                const href = link.getAttribute('href');
-                if (predefinedReadingTimes[href]) {
-                    setReadingTime(timeSpan, predefinedReadingTimes[href]);
-                } else {
-                    fetch(href)
-                        .then(res => res.text())
-                        .then(html => {
-                            const parser = new DOMParser();
-                            const doc = parser.parseFromString(html, 'text/html');
-                            const body = doc.querySelector('.article-body');
-                            if (body) {
-                                const minutes = calculateReadingTime(body.textContent);
-                                setReadingTime(timeSpan, minutes);
-                            }
-                        })
-                        .catch(err => console.error('Reading time fetch failed:', err));
-                }
+                fetchReadingTime(link.getAttribute('href')).then(minutes => {
+                    if (minutes) {
+                        setReadingTime(timeSpan, minutes);
+                    }
+                });
             }
         });
     };
