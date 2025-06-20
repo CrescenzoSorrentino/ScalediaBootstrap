@@ -323,16 +323,21 @@
     };
 
     const updateArticleReadingTime = () => {
-        const articleBody = document.querySelector('.article-body');
         const readingTimeSpan = document.querySelector('.article-meta span[data-i18n="readingTime"]');
-        if (articleBody && readingTimeSpan) {
-            const minutes = calculateReadingTime(articleBody.textContent);
-            readingTimeSpan.setAttribute('data-i18n-options', JSON.stringify({ time: minutes }));
-            if (typeof i18next !== 'undefined') {
-                readingTimeSpan.textContent = i18next.t('readingTime', { time: minutes });
-            } else {
-                readingTimeSpan.textContent = `Tempo di lettura: ${minutes} min`;
+        if (!readingTimeSpan) return;
+
+        const path = window.location.pathname.replace(/^\/+/, '');
+        let minutes = predefinedReadingTimes[path];
+
+        if (!minutes) {
+            const articleBody = document.querySelector('.article-body');
+            if (articleBody) {
+                minutes = calculateReadingTime(articleBody.textContent);
             }
+        }
+
+        if (minutes) {
+            setReadingTime(readingTimeSpan, minutes);
         }
     };
 
