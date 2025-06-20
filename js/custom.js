@@ -419,7 +419,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+    const populateFeaturedArticles = () => {
+        const featuredContainer = document.querySelector('#featured-articles .row');
+        const sourceCards = document.querySelectorAll('#all .card');
+        if (!featuredContainer || !sourceCards.length) return;
+
+        featuredContainer.innerHTML = '';
+
+        sourceCards.forEach(card => {
+            const isRecommended = card.getAttribute('data-recommended') === 'true';
+            const isNew = card.querySelector('.card-badge-new');
+
+            if (isRecommended || isNew) {
+                const clone = card.cloneNode(true);
+
+                if (isRecommended && !clone.querySelector('.card-badge-recommended')) {
+                    const badge = document.createElement('div');
+                    badge.className = 'card-badge card-badge-recommended';
+                    badge.setAttribute('data-i18n', 'featuredArticles.recommended');
+                    badge.textContent = (typeof i18next !== 'undefined') ? i18next.t('featuredArticles.recommended') : 'Consigliato';
+                    clone.prepend(badge);
+                }
+
+                featuredContainer.appendChild(clone);
+            }
+        });
+    };
+
     updateArticleReadingTime();
     updateCardReadingTimes();
     updateNewBadges();
+    populateFeaturedArticles();
 });
