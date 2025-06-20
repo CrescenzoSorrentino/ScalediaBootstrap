@@ -394,6 +394,83 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+    const updateNewBadges = () => {
+        const now = new Date();
+        const twoWeeksMs = 14 * 24 * 60 * 60 * 1000;
+        const cards = document.querySelectorAll('.card[data-pubdate]');
+        cards.forEach(card => {
+            const dateStr = card.getAttribute('data-pubdate');
+            if (!dateStr) return;
+            const [day, month, year] = dateStr.split('/');
+            const pubDate = new Date(`${year}-${month}-${day}T00:00:00`);
+            const diff = now - pubDate;
+            let badge = card.querySelector('.card-badge-new');
+            if (diff <= twoWeeksMs) {
+                if (!badge) {
+                    badge = document.createElement('div');
+                    badge.className = 'card-badge card-badge-new';
+                    badge.setAttribute('data-i18n', 'featuredArticles.new');
+                    badge.textContent = (typeof i18next !== 'undefined') ? i18next.t('featuredArticles.new') : 'Nuovo';
+                    card.prepend(badge);
+                }
+            } else if (badge) {
+                badge.remove();
+            }
+        });
+    };
+
+    const updateFeaturedArticles = () => {
+        const now = new Date();
+        const twoWeeksMs = 14 * 24 * 60 * 60 * 1000;
+        const featuredRow = document.querySelector('#featured-articles .row');
+        if (!featuredRow) return;
+
+        // Remove previously added new article cards
+        featuredRow.querySelectorAll('.featured-new').forEach(col => col.remove());
+
+        const existingLinks = Array.from(featuredRow.querySelectorAll('.card-footer a[href]')).map(a => a.getAttribute('href'));
+
+        document.querySelectorAll('#all .card[data-pubdate]').forEach(card => {
+            const dateStr = card.getAttribute('data-pubdate');
+            if (!dateStr) return;
+            const [day, month, year] = dateStr.split('/');
+            const pubDate = new Date(`${year}-${month}-${day}T00:00:00`);
+            const diff = now - pubDate;
+            const link = card.querySelector('.card-footer a[href]');
+            if (!link) return;
+            const href = link.getAttribute('href');
+
+            if (diff <= twoWeeksMs) {
+                if (existingLinks.includes(href)) {
+                    const existingCard = featuredRow.querySelector(`.card-footer a[href="${href}"]`).closest('.card');
+                    let badge = existingCard.querySelector('.card-badge-new');
+                    if (!badge) {
+                        badge = document.createElement('div');
+                        badge.className = 'card-badge card-badge-new';
+                        badge.setAttribute('data-i18n', 'featuredArticles.new');
+                        badge.textContent = (typeof i18next !== 'undefined') ? i18next.t('featuredArticles.new') : 'Nuovo';
+                        existingCard.prepend(badge);
+                    }
+                } else {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-4 px-3 featured-new';
+                    const clone = card.cloneNode(true);
+                    if (!clone.querySelector('.card-badge-new')) {
+                        const badge = document.createElement('div');
+                        badge.className = 'card-badge card-badge-new';
+                        badge.setAttribute('data-i18n', 'featuredArticles.new');
+                        badge.textContent = (typeof i18next !== 'undefined') ? i18next.t('featuredArticles.new') : 'Nuovo';
+                        clone.prepend(badge);
+                    }
+                    col.appendChild(clone);
+                    featuredRow.appendChild(col);
+                }
+            }
+        });
+    };
+
     updateArticleReadingTime();
     updateCardReadingTimes();
+    updateNewBadges();
+    updateFeaturedArticles();
 });
