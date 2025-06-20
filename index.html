@@ -2,26 +2,7 @@
 <html>
 <head>
 
-    <!-- Google Analytics (GDPR Compliant) -->
-    <script type="text/plain" data-cookieconsent="analytics" async src="https://www.googletagmanager.com/gtag/js?id=G-50TEXSN8V2"></script>
-    <script type="text/plain" data-cookieconsent="analytics">
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-50TEXSN8V2', { 'anonymize_ip': true, 'send_page_view': false });
-    </script>
-    <!-- /Google Analytics GDPR -->
-
-    <!-- Google Tag Manager -->
-    <script type="text/plain" data-cookieconsent="analytics">
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id=GTM-PXVN2GTW'+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-PXVN2GTW');
-    </script>
-    <!-- Fine Google Tag Manager -->
+    <!-- Analytics and Tag Manager will be loaded after consent -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -604,11 +585,20 @@
     </script>
 
     <script type="text/javascript">
-        _iub.cs.api.callConsentGivenCallback(function(){
-            if (typeof gtag === 'function') {
-                gtag('event', 'page_view');
-            }
-        });
+        function loadAnalyticsScripts() {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            var gtagScript = document.createElement('script');
+            gtagScript.async = true;
+            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-50TEXSN8V2';
+            document.head.appendChild(gtagScript);
+
+            gtag('js', new Date());
+            gtag('config', 'G-50TEXSN8V2', { 'anonymize_ip': true });
+
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:''; j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PXVN2GTW');
+        }
+        _iub.cs.api.callConsentGivenCallback(loadAnalyticsScripts);
     </script>
 
     <script type="text/javascript">
