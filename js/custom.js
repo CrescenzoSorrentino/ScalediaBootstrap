@@ -444,6 +444,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 featuredContainer.appendChild(clone);
             }
         });
+
+        // Animate newly added cards so they become visible
+        animateCards();
     };
 
     updateArticleReadingTime();
