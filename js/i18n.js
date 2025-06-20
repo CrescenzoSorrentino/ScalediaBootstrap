@@ -215,6 +215,9 @@
           // Apply translations
           $('body').localize();
 
+          // Notify listeners that localization finished
+          document.dispatchEvent(new CustomEvent('localized'));
+
           // Clear the timeout since localization completed normally
           clearTimeout(localizationTimeout);
 
