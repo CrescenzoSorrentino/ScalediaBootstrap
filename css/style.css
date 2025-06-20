@@ -66,7 +66,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(10, 88, 202, 0.9)), url('https://via.placeholder.com/1920x1080');
+    /* Removed external placeholder image to reduce network requests */
+    background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(10, 88, 202, 0.9));
     background-size: cover;
     background-position: center;
     padding: 140px 0;
