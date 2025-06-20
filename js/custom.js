@@ -327,9 +327,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Run the animation
     animateCards();
-});
-    // Run the animation
-    animateCards();
 
     // Calculate reading time based on word count
     const calculateReadingTime = (text) => {
