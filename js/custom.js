@@ -107,33 +107,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize filter synchronization
     syncFilters();
 
-    // Match read more button color with badge color
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        const badge = card.querySelector('.badge');
-        const readMoreBtn = card.querySelector('.card-footer .btn');
+    const setButtonColors = (scope = document) => {
+        const cards = scope.querySelectorAll('.card');
+        cards.forEach(card => {
+            const badge = card.querySelector('.badge');
+            const readMoreBtn = card.querySelector('.card-footer .btn');
 
-        if (badge && readMoreBtn) {
-            // Get badge color class (e.g., bg-success, bg-primary, bg-info)
-            const badgeClasses = badge.className.split(' ');
-            const bgColorClass = badgeClasses.find(cls => cls.startsWith('bg-'));
-
-            if (bgColorClass) {
-                // Extract color name (e.g., success, primary, info)
-                const colorName = bgColorClass.replace('bg-', '');
-
-                // Remove existing outline color classes
-                readMoreBtn.classList.forEach(cls => {
-                    if (cls.startsWith('btn-outline-')) {
-                        readMoreBtn.classList.remove(cls);
-                    }
-                });
-
-                // Add the matching outline color class
-                readMoreBtn.classList.add(`btn-outline-${colorName}`);
+            if (badge && readMoreBtn) {
+                const badgeClasses = badge.className.split(' ');
+                const bgColorClass = badgeClasses.find(cls => cls.startsWith('bg-'));
+                if (bgColorClass) {
+                    const colorName = bgColorClass.replace('bg-', '');
+                    readMoreBtn.classList.forEach(cls => {
+                        if (cls.startsWith('btn-outline-')) {
+                            readMoreBtn.classList.remove(cls);
+                        }
+                    });
+                    readMoreBtn.classList.add(`btn-outline-${colorName}`);
+                }
             }
-        }
-    });
+        });
+    };
+
+    // Apply colors to initial cards
+    setButtonColors();
 
     // Preload the placeholder image data URI for external images
     const externalPlaceholderImage = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22300%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20300%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A15pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1%22%3E%3Crect%20width%3D%22300%22%20height%3D%22200%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22110.5%22%20y%3D%22107.1%22%3EImage%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E';
@@ -152,49 +149,57 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const aidaModelImage = 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80';
 
-    // Replace all placeholder images with realistic images
-    document.querySelectorAll('img').forEach(img => {
-        const src = img.getAttribute('src');
-        const alt = img.getAttribute('alt') || '';
-
-        // Replace external placeholder images
-        if (src && (src.includes('picsum.photos') || src.includes('via.placeholder.com'))) {
-            img.setAttribute('src', externalPlaceholderImage);
-        }
-
-        // For local images that include 'placeholder.jpg', set appropriate realistic image based on context
-        if (src && src.includes('placeholder.jpg')) {
-            // Check alt text to determine which realistic image to use
-            if (alt.includes('Credit Card')) {
-                img.setAttribute('src', creditCardImage);
-            } else if (alt.includes('Duolingo')) {
-                img.setAttribute('src', duolingoImage);
-            } else if (alt.includes('Marketing Glossary')) {
-                img.setAttribute('src', marketingGlossaryImage);
-            } else if (alt.includes('AB Test')) {
-                img.setAttribute('src', abTestImage);
-            } else if (alt.includes('AIDA Model')) {
-                img.setAttribute('src', aidaModelImage);
-            } else {
-                // If no specific match in alt text, check parent elements for clues
-                const parentCard = img.closest('.card');
-                if (parentCard) {
-                    const cardTitle = parentCard.querySelector('.card-title');
-                    if (cardTitle) {
-                        const titleText = cardTitle.textContent.toLowerCase();
-
-                        if (titleText.includes('credit') || titleText.includes('carte di credito')) {
-                            img.setAttribute('src', creditCardImage);
-                        } else if (titleText.includes('duolingo')) {
-                            img.setAttribute('src', duolingoImage);
-                        } else if (titleText.includes('glossary') || titleText.includes('glossario')) {
-                            img.setAttribute('src', marketingGlossaryImage);
-                        } else if (titleText.includes('ab test') || titleText.includes('a/b')) {
-                            img.setAttribute('src', abTestImage);
-                        } else if (titleText.includes('aida')) {
-                            img.setAttribute('src', aidaModelImage);
+    const replacePlaceholderImages = (scope = document) => {
+        scope.querySelectorAll('img').forEach(img => {
+            const src = img.getAttribute('src');
+            const alt = img.getAttribute('alt') || '';
+            if (src && (src.includes('picsum.photos') || src.includes('via.placeholder.com'))) {
+                img.setAttribute('src', externalPlaceholderImage);
+            }
+            if (src && src.includes('placeholder.jpg')) {
+                if (alt.includes('Credit Card')) {
+                    img.setAttribute('src', creditCardImage);
+                } else if (alt.includes('Duolingo')) {
+                    img.setAttribute('src', duolingoImage);
+                } else if (alt.includes('Marketing Glossary')) {
+                    img.setAttribute('src', marketingGlossaryImage);
+                } else if (alt.includes('AB Test')) {
+                    img.setAttribute('src', abTestImage);
+                } else if (alt.includes('AIDA Model')) {
+                    img.setAttribute('src', aidaModelImage);
+                } else {
+                    const parentCard = img.closest('.card');
+                    if (parentCard) {
+                        const cardTitle = parentCard.querySelector('.card-title');
+                        if (cardTitle) {
+                            const titleText = cardTitle.textContent.toLowerCase();
+                            if (titleText.includes('credit') || titleText.includes('carte di credito')) {
+                                img.setAttribute('src', creditCardImage);
+                            } else if (titleText.includes('duolingo')) {
+                                img.setAttribute('src', duolingoImage);
+                            } else if (titleText.includes('glossary') || titleText.includes('glossario')) {
+                                img.setAttribute('src', marketingGlossaryImage);
+                            } else if (titleText.includes('ab test') || titleText.includes('a/b')) {
+                                img.setAttribute('src', abTestImage);
+                            } else if (titleText.includes('aida')) {
+                                img.setAttribute('src', aidaModelImage);
+                            } else {
+                                const currentPath = window.location.pathname;
+                                if (currentPath.includes('aida-model')) {
+                                    img.setAttribute('src', aidaModelImage);
+                                } else if (currentPath.includes('ab-test')) {
+                                    img.setAttribute('src', abTestImage);
+                                } else if (currentPath.includes('marketing-glossary')) {
+                                    img.setAttribute('src', marketingGlossaryImage);
+                                } else if (currentPath.includes('credit-cards')) {
+                                    img.setAttribute('src', creditCardImage);
+                                } else if (currentPath.includes('duolingo-case')) {
+                                    img.setAttribute('src', duolingoImage);
+                                } else {
+                                    img.setAttribute('src', localPlaceholderImage);
+                                }
+                            }
                         } else {
-                            // Check if we're in an article page and use the appropriate image
                             const currentPath = window.location.pathname;
                             if (currentPath.includes('aida-model')) {
                                 img.setAttribute('src', aidaModelImage);
@@ -211,7 +216,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                         }
                     } else {
-                        // Check if we're in an article page and use the appropriate image
                         const currentPath = window.location.pathname;
                         if (currentPath.includes('aida-model')) {
                             img.setAttribute('src', aidaModelImage);
@@ -227,96 +231,75 @@ document.addEventListener('DOMContentLoaded', function() {
                             img.setAttribute('src', localPlaceholderImage);
                         }
                     }
-                } else {
-                    // Check if we're in an article page and use the appropriate image
-                    const currentPath = window.location.pathname;
-                    if (currentPath.includes('aida-model')) {
-                        img.setAttribute('src', aidaModelImage);
-                    } else if (currentPath.includes('ab-test')) {
-                        img.setAttribute('src', abTestImage);
-                    } else if (currentPath.includes('marketing-glossary')) {
-                        img.setAttribute('src', marketingGlossaryImage);
-                    } else if (currentPath.includes('credit-cards')) {
-                        img.setAttribute('src', creditCardImage);
-                    } else if (currentPath.includes('duolingo-case')) {
-                        img.setAttribute('src', duolingoImage);
-                    } else {
-                        img.setAttribute('src', localPlaceholderImage);
-                    }
                 }
             }
-        }
-
-        // Handle image load errors
-        img.onerror = function() {
-            const originalSrc = this.getAttribute('src');
-            const imgAlt = this.getAttribute('alt') || '';
-
-            // Use different placeholders for external vs local images
-            if (originalSrc && (originalSrc.includes('picsum.photos') || originalSrc.includes('via.placeholder.com'))) {
-                this.setAttribute('src', externalPlaceholderImage);
-                console.info('External image replaced: ' + originalSrc);
-            } else {
-                // Check alt text for specific image type
-                if (imgAlt.includes('Credit Card')) {
-                    this.setAttribute('src', creditCardImage);
-                } else if (imgAlt.includes('Duolingo')) {
-                    this.setAttribute('src', duolingoImage);
-                } else if (imgAlt.includes('Marketing Glossary')) {
-                    this.setAttribute('src', marketingGlossaryImage);
-                } else if (imgAlt.includes('AB Test')) {
-                    this.setAttribute('src', abTestImage);
-                } else if (imgAlt.includes('AIDA Model')) {
-                    this.setAttribute('src', aidaModelImage);
+            img.onerror = function() {
+                const originalSrc = this.getAttribute('src');
+                const imgAlt = this.getAttribute('alt') || '';
+                if (originalSrc && (originalSrc.includes('picsum.photos') || originalSrc.includes('via.placeholder.com'))) {
+                    this.setAttribute('src', externalPlaceholderImage);
+                    console.info('External image replaced: ' + originalSrc);
                 } else {
-                    // If no specific match in alt text, check the current page URL
-                    const currentPath = window.location.pathname;
-                    if (currentPath.includes('aida-model')) {
-                        this.setAttribute('src', aidaModelImage);
-                    } else if (currentPath.includes('ab-test')) {
-                        this.setAttribute('src', abTestImage);
-                    } else if (currentPath.includes('marketing-glossary')) {
-                        this.setAttribute('src', marketingGlossaryImage);
-                    } else if (currentPath.includes('credit-cards')) {
+                    if (imgAlt.includes('Credit Card')) {
                         this.setAttribute('src', creditCardImage);
-                    } else if (currentPath.includes('duolingo-case')) {
+                    } else if (imgAlt.includes('Duolingo')) {
                         this.setAttribute('src', duolingoImage);
+                    } else if (imgAlt.includes('Marketing Glossary')) {
+                        this.setAttribute('src', marketingGlossaryImage);
+                    } else if (imgAlt.includes('AB Test')) {
+                        this.setAttribute('src', abTestImage);
+                    } else if (imgAlt.includes('AIDA Model')) {
+                        this.setAttribute('src', aidaModelImage);
                     } else {
-                        // If still no match, check parent elements for clues
-                        const parentCard = this.closest('.card');
-                        if (parentCard) {
-                            const cardTitle = parentCard.querySelector('.card-title');
-                            if (cardTitle) {
-                                const titleText = cardTitle.textContent.toLowerCase();
-                                if (titleText.includes('credit') || titleText.includes('carte di credito')) {
-                                    this.setAttribute('src', creditCardImage);
-                                } else if (titleText.includes('duolingo')) {
-                                    this.setAttribute('src', duolingoImage);
-                                } else if (titleText.includes('glossary') || titleText.includes('glossario')) {
-                                    this.setAttribute('src', marketingGlossaryImage);
-                                } else if (titleText.includes('ab test') || titleText.includes('a/b')) {
-                                    this.setAttribute('src', abTestImage);
-                                } else if (titleText.includes('aida')) {
-                                    this.setAttribute('src', aidaModelImage);
+                        const currentPath = window.location.pathname;
+                        if (currentPath.includes('aida-model')) {
+                            this.setAttribute('src', aidaModelImage);
+                        } else if (currentPath.includes('ab-test')) {
+                            this.setAttribute('src', abTestImage);
+                        } else if (currentPath.includes('marketing-glossary')) {
+                            this.setAttribute('src', marketingGlossaryImage);
+                        } else if (currentPath.includes('credit-cards')) {
+                            this.setAttribute('src', creditCardImage);
+                        } else if (currentPath.includes('duolingo-case')) {
+                            this.setAttribute('src', duolingoImage);
+                        } else {
+                            const parentCard = this.closest('.card');
+                            if (parentCard) {
+                                const cardTitle = parentCard.querySelector('.card-title');
+                                if (cardTitle) {
+                                    const titleText = cardTitle.textContent.toLowerCase();
+                                    if (titleText.includes('credit') || titleText.includes('carte di credito')) {
+                                        this.setAttribute('src', creditCardImage);
+                                    } else if (titleText.includes('duolingo')) {
+                                        this.setAttribute('src', duolingoImage);
+                                    } else if (titleText.includes('glossary') || titleText.includes('glossario')) {
+                                        this.setAttribute('src', marketingGlossaryImage);
+                                    } else if (titleText.includes('ab test') || titleText.includes('a/b')) {
+                                        this.setAttribute('src', abTestImage);
+                                    } else if (titleText.includes('aida')) {
+                                        this.setAttribute('src', aidaModelImage);
+                                    } else {
+                                        this.setAttribute('src', localPlaceholderImage);
+                                    }
                                 } else {
                                     this.setAttribute('src', localPlaceholderImage);
                                 }
                             } else {
                                 this.setAttribute('src', localPlaceholderImage);
                             }
-                        } else {
-                            this.setAttribute('src', localPlaceholderImage);
                         }
                     }
+                    console.info('Local image replaced: ' + originalSrc);
                 }
-                console.info('Local image replaced: ' + originalSrc);
-            }
-        }
-    });
+            };
+        });
+    };
+
+    replacePlaceholderImages();
 
     // Animate cards to make them visible
-    const animateCards = () => {
-        const cards = document.querySelectorAll('.card');
+    const animateCards = (scope = document) => {
+        const cards = scope.querySelectorAll('.card');
         cards.forEach((card, index) => {
             // Add a slight delay for each card to create a staggered animation effect
             setTimeout(() => {
@@ -367,8 +350,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    const updateCardReadingTimes = () => {
-        const cards = document.querySelectorAll('.card');
+    const updateCardReadingTimes = (scope = document) => {
+        const cards = scope.querySelectorAll('.card');
         cards.forEach(card => {
             const link = card.querySelector('.card-footer a[href]');
             const timeSpan = card.querySelector('.reading-time span');
@@ -394,10 +377,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    const updateNewBadges = () => {
+    const updateNewBadges = (scope = document) => {
         const now = new Date();
         const twoWeeksMs = 14 * 24 * 60 * 60 * 1000;
-        const cards = document.querySelectorAll('.card[data-pubdate]');
+        const cards = scope.querySelectorAll('.card[data-pubdate]');
         cards.forEach(card => {
             const dateStr = card.getAttribute('data-pubdate');
             if (!dateStr) return;
@@ -445,7 +428,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Animate newly added cards so they become visible
+        setButtonColors(featuredContainer);
+        replacePlaceholderImages(featuredContainer);
+        updateCardReadingTimes(featuredContainer);
+        updateNewBadges(featuredContainer);
         animateCards();
     };
 
