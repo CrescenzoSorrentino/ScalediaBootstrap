@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
+(function() {
+    function init() {
     // Synchronize navbar category filters with article section tabs
     const syncFilters = () => {
         // Get navbar dropdown items and dropdown toggle
@@ -458,4 +459,11 @@ document.addEventListener('DOMContentLoaded', function() {
     updateRecommendedBadges();
     updateNewBadges();
     populateFeaturedArticles();
-});
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();

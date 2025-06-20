@@ -1,5 +1,6 @@
 // Initialize i18next
-document.addEventListener('DOMContentLoaded', function() {
+(function() {
+  function init() {
   // Flag to prevent infinite loops with MutationObserver
   let isLocalizing = false;
 
@@ -316,4 +317,10 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('Error updating language switcher:', error.message, error.stack);
     }
   }
-});
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
