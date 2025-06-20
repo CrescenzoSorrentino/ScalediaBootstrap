@@ -39,6 +39,11 @@ The project is designed to be deployed on GitHub Pages:
 
 Any other static hosting provider can also serve the contents of the repository.
 
+## Performance
+
+The site uses Google Fonts for typography. To keep the Largest Contentful Paint (LCP) fast on mobile devices, only the required font weights are loaded (400-700).
+
+
 ## Contributing
 
 Contributions are welcome. Feel free to open an issue or pull request on GitHub if you spot a problem or would like to suggest improvements.

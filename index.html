@@ -9,6 +9,287 @@
     <meta name="description" content="Blog su marketing, finanza personale e programmazione. Consigli e strategie per far crescere le tue competenze digitali.">
     <link rel="canonical" href="https://scaledia.net/">
     <title>Blog di Marketing, Finanza Personale e Programmazione</title>
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="css/bootstrap.min.css" as="style">
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="css/flags.css" as="style">
+<style>
+/* Custom Styles for Blog */
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    font-size: 2.2rem;
+    color: #212529;
+    text-transform: uppercase;
+    padding-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(13, 110, 253, 0.2);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    animation: expand 1s ease-out forwards;
+}
+
+.section-title.text-center::before {
+    left: 0;
+    width: 100%;
+}
+
+.section-title.text-center::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes expand {
+    from { width: 0; }
+    to { width: 80px; }
+}
+
+/* Hero Section */
+.hero-section {
+    /* Removed external placeholder image to reduce network requests */
+    background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(10, 88, 202, 0.9));
+    background-size: cover;
+    background-position: center;
+    padding: 140px 0;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section .btn {
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.hero-section .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Card Styles and Hover Effects */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+/* Card Badge Styles */
+.card-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-badge-new {
+    background-color: #dc3545;
+    color: white;
+}
+
+.card-badge-recommended {
+    background-color: #198754;
+    color: white;
+}
+
+/* Increased spacing between card rows */
+.col-md-6.col-lg-4.mb-4 {
+    margin-bottom: 3rem !important;
+}
+
+/* Increased spacing for top article cards */
+.col-md-4.px-3 {
+    margin-bottom: 3rem !important;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.card-body {
+    padding: 1.75rem 1.5rem 1.25rem;
+}
+
+.card-title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    line-height: 1.4;
+}
+
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.8em;
+    border-radius: 30px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}
+
+/* Social Icons */
+.social-icons a {
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #0d6efd !important;
+}
+
+/* Navbar Styling */
+.navbar {
+    padding: 15px 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #ffffff;
+}
+
+.dropdown-menu {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+}
+
+/* Language Dropdown Styles */
+#languageDropdown img,
+.dropdown-item img {
+    width: 16px;
+    height: 12px;
+    object-fit: cover;
+    margin-right: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item.active {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: #0d6efd;
+    font-weight: 500;
+}
+
+/* Newsletter Section */
+</style>
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -16,11 +297,14 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Flag Icons CSS -->
-    <link href="css/flags.css" rel="stylesheet">
+    <link href="css/flags.css" rel="stylesheet" media="print" onload="this.media='all'">
 
     <!-- Iubenda Cookie Banner -->
     <script type="text/javascript">
@@ -147,7 +431,7 @@
             <div class="row align-items-center">
                 <div class="col-md-4 mb-5 mb-md-0">
                     <div class="about-img-container text-center">
-                        <img src="images/Crescenzo-Sorrentino.webp" alt="Profile Image" class="img-fluid rounded-circle" loading="lazy">
+                        <img src="images/Crescenzo-Sorrentino.webp" alt="Profile Image" class="img-fluid rounded-circle" loading="lazy" width="200" height="200">
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -574,25 +858,27 @@
             </div>
         </div>
     </footer>
+    <script>
+window.addEventListener('load', function() {
+  var scripts = [
+    'js/bootstrap.bundle.min.js',
+    'https://code.jquery.com/jquery-3.6.0.min.js',
+    'https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js',
+    'https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.2/i18nextHttpBackend.min.js',
+    'https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js',
+    'https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js',
+    'js/i18n.js',
+    'js/custom.js'
+  ];
+  scripts.forEach(function(src) {
+    var s = document.createElement('script');
+    s.src = src;
+    s.defer = true;
+    document.body.appendChild(s);
+  });
+});
+    </script>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="js/bootstrap.bundle.min.js" defer></script>
-
-    <!-- jQuery (necessario per jqueryI18next) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-
-    <!-- Librerie i18next -->
-    <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.2/i18nextHttpBackend.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js" defer></script>
-
-    <!-- Il tuo file di configurazione i18n -->
-    <script src="js/i18n.js" defer></script>
-
-
-    <!-- Custom JavaScript -->
-    <script src="js/custom.js" defer></script>
 
     <!-- Iubenda Privacy Policy and Cookie Policy Scripts -->
     <script type="text/javascript">
