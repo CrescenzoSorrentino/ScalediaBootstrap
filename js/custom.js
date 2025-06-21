@@ -479,12 +479,14 @@
     populateFeaturedArticles();
 
     document.addEventListener('localized', () => {
+        // Update dynamic data when translations are applied.
+        // Avoid repopulating the "featured" section here to prevent
+        // a MutationObserver loop that causes cards to continually reload.
         updateArticleReadingTime();
         updateCardReadingTimes();
         fetchCardReadingTimesFromArticles();
         updateRecommendedBadges();
         updateNewBadges();
-        populateFeaturedArticles();
     });
     }
 
