@@ -364,6 +364,30 @@
         });
     };
 
+    const fetchCardReadingTimesFromArticles = (scope = document) => {
+        const cards = scope.querySelectorAll('.card');
+        cards.forEach(card => {
+            const link = card.querySelector('a[href]');
+            const timeSpan = card.querySelector('.reading-time span');
+            if (!link || !timeSpan) return;
+
+            const url = new URL(link.getAttribute('href'), window.location.origin).toString();
+            fetch(url)
+                .then(resp => resp.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const articleBody = doc.querySelector('.article-body');
+                    if (articleBody) {
+                        const minutes = getReadingTime(articleBody.textContent);
+                        card.setAttribute('data-reading-time', minutes);
+                        setReadingTime(timeSpan, minutes);
+                    }
+                })
+                .catch(err => console.error('Error fetching article for reading time', url, err));
+        });
+    };
+
     const updateRecommendedBadges = (scope = document) => {
         const cards = scope.querySelectorAll('.card[data-recommended="true"]');
         cards.forEach(card => {
@@ -441,6 +465,7 @@
         setButtonColors(featuredContainer);
         replacePlaceholderImages(featuredContainer);
         updateCardReadingTimes(featuredContainer);
+        fetchCardReadingTimesFromArticles(featuredContainer);
         updateNewBadges(featuredContainer);
         animateCards();
     };
@@ -448,6 +473,7 @@
     // Initial population in case the 'localized' event is not triggered
     updateArticleReadingTime();
     updateCardReadingTimes();
+    fetchCardReadingTimesFromArticles();
     updateRecommendedBadges();
     updateNewBadges();
     populateFeaturedArticles();
@@ -455,6 +481,7 @@
     document.addEventListener('localized', () => {
         updateArticleReadingTime();
         updateCardReadingTimes();
+        fetchCardReadingTimesFromArticles();
         updateRecommendedBadges();
         updateNewBadges();
         populateFeaturedArticles();
