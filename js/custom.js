@@ -321,10 +321,21 @@
 
     const setReadingTime = (element, minutes) => {
         element.setAttribute('data-i18n-options', JSON.stringify({ time: minutes }));
-        if (typeof i18next !== 'undefined') {
-            element.textContent = i18next.t('readingTime', { time: minutes });
+
+        let translated = null;
+        if (typeof i18next !== 'undefined' && i18next.isInitialized && i18next.exists('readingTime')) {
+            translated = i18next.t('readingTime', { time: minutes });
+        }
+
+        if (translated && translated !== 'readingTime') {
+            element.textContent = translated;
         } else {
-            element.textContent = `Tempo di lettura: ${minutes} min`;
+            const lang = (document.documentElement.lang || 'it').toLowerCase();
+            if (lang.startsWith('en')) {
+                element.textContent = `Reading time: ${minutes} min`;
+            } else {
+                element.textContent = `Tempo di lettura: ${minutes} min`;
+            }
         }
     };
 
