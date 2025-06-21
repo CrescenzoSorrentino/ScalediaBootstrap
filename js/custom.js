@@ -360,9 +360,17 @@
     const updateCardReadingTimes = (scope = document) => {
         const cards = scope.querySelectorAll('.card');
         cards.forEach(card => {
-            const link = card.querySelector('.card-footer a[href]');
             const timeSpan = card.querySelector('.reading-time span');
-            if (link && timeSpan) {
+            if (!timeSpan) return;
+
+            const predefined = card.getAttribute('data-reading-time');
+            if (predefined) {
+                setReadingTime(timeSpan, parseInt(predefined, 10));
+                return;
+            }
+
+            const link = card.querySelector('.card-footer a[href]');
+            if (link) {
                 fetchReadingTime(link.getAttribute('href')).then(minutes => {
                     if (minutes) {
                         setReadingTime(timeSpan, minutes);
