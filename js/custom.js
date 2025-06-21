@@ -395,12 +395,17 @@
 
     const populateFeaturedArticles = () => {
         const featuredContainer = document.querySelector('#featured-articles .row');
-        const sourceCards = document.querySelectorAll('#all .card');
+        const sourceCards = document.querySelectorAll('#articles .card');
         if (!featuredContainer || !sourceCards.length) return;
 
         featuredContainer.innerHTML = '';
 
+        const seen = new Set();
         sourceCards.forEach(card => {
+            const link = card.querySelector('a[href]');
+            const href = link ? link.getAttribute('href') : null;
+            if (href && seen.has(href)) return;
+            if (href) seen.add(href);
             const isRecommended = card.getAttribute('data-recommended') === 'true';
             const isNew = card.querySelector('.card-badge-new');
 
