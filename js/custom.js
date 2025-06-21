@@ -312,23 +312,11 @@
     // Run the animation
     animateCards();
 
-    // Calculate reading time using the helper library if available
-    const calculateReadingTime = (text) => {
-        if (window.ReadingTime && typeof window.ReadingTime.estimate === 'function') {
-            return window.ReadingTime.estimate(text);
-        }
+    // Simple reading time calculation
+    const getReadingTime = (text) => {
         const wordsPerMinute = 200;
-        const words = text.trim().split(/\s+/).length;
+        const words = text ? text.trim().split(/\s+/).length : 0;
         return Math.max(1, Math.ceil(words / wordsPerMinute));
-    };
-
-    const updateArticleReadingTime = () => {
-        const articleBody = document.querySelector('.article-body');
-        const readingTimeSpan = document.querySelector('.article-meta span[data-i18n="readingTime"]');
-        if (articleBody && readingTimeSpan) {
-            const minutes = calculateReadingTime(articleBody.textContent);
-            setReadingTime(readingTimeSpan, minutes);
-        }
     };
 
     const setReadingTime = (element, minutes) => {
@@ -340,21 +328,13 @@
         }
     };
 
-    const fetchReadingTime = (href) => {
-        return fetch(href)
-            .then(res => res.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const body = doc.querySelector('.article-body');
-                if (body) {
-                    return calculateReadingTime(body.textContent);
-                }
-            })
-            .catch(err => {
-                console.error('Reading time fetch failed:', err);
-                return null;
-            });
+    const updateArticleReadingTime = () => {
+        const articleBody = document.querySelector('.article-body');
+        const readingTimeSpan = document.querySelector('.article-meta span[data-i18n="readingTime"]');
+        if (articleBody && readingTimeSpan) {
+            const minutes = getReadingTime(articleBody.textContent);
+            setReadingTime(readingTimeSpan, minutes);
+        }
     };
 
     const updateCardReadingTimes = (scope = document) => {
@@ -363,20 +343,13 @@
             const timeSpan = card.querySelector('.reading-time span');
             if (!timeSpan) return;
 
-            const predefined = card.getAttribute('data-reading-time');
-            if (predefined) {
-                setReadingTime(timeSpan, parseInt(predefined, 10));
-                return;
+            let minutes = parseInt(card.getAttribute('data-reading-time'), 10);
+            if (isNaN(minutes)) {
+                const snippet = card.querySelector('.card-text');
+                minutes = snippet ? getReadingTime(snippet.textContent) : 1;
             }
 
-            const link = card.querySelector('.card-footer a[href]');
-            if (link) {
-                fetchReadingTime(link.getAttribute('href')).then(minutes => {
-                    if (minutes) {
-                        setReadingTime(timeSpan, minutes);
-                    }
-                });
-            }
+            setReadingTime(timeSpan, minutes);
         });
     };
 
