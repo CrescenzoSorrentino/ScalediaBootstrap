@@ -432,13 +432,10 @@
     document.addEventListener('localized', () => {
         updateArticleReadingTime();
         updateCardReadingTimes();
+        updateRecommendedBadges();
+        updateNewBadges();
+        populateFeaturedArticles();
     });
-
-    updateArticleReadingTime();
-    updateCardReadingTimes();
-    updateRecommendedBadges();
-    updateNewBadges();
-    populateFeaturedArticles();
     }
 
     if (document.readyState === 'loading') {
