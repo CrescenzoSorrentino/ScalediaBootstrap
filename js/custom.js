@@ -429,6 +429,13 @@
         animateCards();
     };
 
+    // Initial population in case the 'localized' event is not triggered
+    updateArticleReadingTime();
+    updateCardReadingTimes();
+    updateRecommendedBadges();
+    updateNewBadges();
+    populateFeaturedArticles();
+
     document.addEventListener('localized', () => {
         updateArticleReadingTime();
         updateCardReadingTimes();
