@@ -321,6 +321,10 @@
     }
   }
 
+  // End of updateLanguageSwitcher
+  }
+
+  // End of init function
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
