@@ -428,58 +428,6 @@
         });
     };
 
-    const populateHeroCarousel = () => {
-        const carouselInner = document.getElementById('heroCarouselInner');
-        if (!carouselInner) return;
-
-        const sourceCols = Array.from(document.querySelectorAll('#articles .col-md-6.col-lg-4'));
-        carouselInner.innerHTML = '';
-        if (!sourceCols.length) return;
-
-        const cards = sourceCols.map(col => {
-            const card = col.querySelector('.card');
-            if (!card) return null;
-            const link = card.querySelector('a[href]');
-            const href = link ? link.getAttribute('href') : null;
-            if (!href) return null;
-            const isRecommended = card.getAttribute('data-recommended') === 'true';
-            const isNew = !!card.querySelector('.card-badge-new');
-            const dateStr = card.getAttribute('data-pubdate');
-            let date = new Date(0);
-            if (dateStr) {
-                const [day, month, year] = dateStr.split('/');
-                date = new Date(`${year}-${month}-${day}T00:00:00`);
-            }
-            return { col, href, isRecommended, isNew, date };
-        }).filter(Boolean).filter(d => d.isRecommended || d.isNew);
-
-        cards.sort((a, b) => {
-            if (a.isRecommended !== b.isRecommended) {
-                return a.isRecommended ? -1 : 1;
-            }
-            return b.date - a.date;
-        });
-
-        const seen = new Set();
-        let added = 0;
-        for (const data of cards) {
-            if (added >= 4) break;
-            if (seen.has(data.href)) continue;
-            seen.add(data.href);
-            const clone = data.col.cloneNode(true);
-            const item = document.createElement('div');
-            item.className = 'carousel-item' + (added === 0 ? ' active' : '');
-            item.appendChild(clone);
-            carouselInner.appendChild(item);
-            added++;
-        }
-
-        replacePlaceholderImages(carouselInner);
-        setButtonColors(carouselInner);
-        updateCardReadingTimes(carouselInner);
-        updateRecommendedBadges(carouselInner);
-        updateNewBadges(carouselInner);
-    };
 
     const populateCaptionsCarousel = () => {
         const inner = document.getElementById('carouselExampleCaptionsInner');
@@ -577,7 +525,6 @@
     fetchCardReadingTimesFromArticles();
     updateRecommendedBadges();
     updateNewBadges();
-    populateHeroCarousel();
     populateCaptionsCarousel();
 
     document.addEventListener('localized', () => {
@@ -588,9 +535,6 @@
         updateRecommendedBadges();
         updateNewBadges();
 
-        // Repopulate the hero carousel after localization to ensure
-        // translated cards remain visible.
-        populateHeroCarousel();
         populateCaptionsCarousel();
     });
     }
