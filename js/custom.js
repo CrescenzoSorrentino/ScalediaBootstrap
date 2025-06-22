@@ -453,6 +453,9 @@
                 const img = card.querySelector('img.card-img-top');
                 const titleEl = card.querySelector('.card-title');
                 const descEl = card.querySelector('.card-text');
+                const readTimeEl = card.querySelector('.reading-time');
+                const dateEl = card.querySelector('.article-date');
+                const authorEl = card.querySelector('[data-i18n="writtenBy"]');
 
                 const item = document.createElement('div');
                 item.className = 'carousel-item';
@@ -489,6 +492,25 @@
                     p.className = 'd-none d-sm-block';
                     p.textContent = descEl.textContent;
                     caption.appendChild(p);
+                }
+
+                if (readTimeEl) {
+                    const rt = readTimeEl.cloneNode(true);
+                    caption.appendChild(rt);
+                }
+
+                if (dateEl) {
+                    const dateClone = document.createElement('p');
+                    dateClone.className = 'text-muted small';
+                    dateClone.innerHTML = `<i class="bi bi-calendar me-1"></i> <span class="article-date">${dateEl.textContent}</span>`;
+                    caption.appendChild(dateClone);
+                }
+
+                if (authorEl) {
+                    const authorClone = document.createElement('p');
+                    authorClone.className = 'text-muted small';
+                    authorClone.innerHTML = `<i class="bi bi-person me-1"></i> ${authorEl.outerHTML}`;
+                    caption.appendChild(authorClone);
                 }
 
                 if (href) {
