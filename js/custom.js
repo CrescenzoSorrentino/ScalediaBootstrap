@@ -432,27 +432,43 @@
         const heroGrid = document.getElementById('heroFeatured');
         if (!heroGrid) return;
 
-        const sourceCols = document.querySelectorAll('#articles .col-md-6.col-lg-4');
+        const sourceCols = Array.from(document.querySelectorAll('#articles .col-md-6.col-lg-4'));
         heroGrid.innerHTML = '';
         if (!sourceCols.length) return;
 
-        const seen = new Set();
-        let added = 0;
-        for (const col of sourceCols) {
-            if (added >= 4) break;
+        const cards = sourceCols.map(col => {
             const card = col.querySelector('.card');
-            if (!card) continue;
+            if (!card) return null;
             const link = card.querySelector('a[href]');
             const href = link ? link.getAttribute('href') : null;
-            if (href && seen.has(href)) continue;
+            if (!href) return null;
             const isRecommended = card.getAttribute('data-recommended') === 'true';
-            const isNew = card.querySelector('.card-badge-new');
-            if (isRecommended || isNew) {
-                if (href) seen.add(href);
-                const clone = col.cloneNode(true);
-                heroGrid.appendChild(clone);
-                added++;
+            const isNew = !!card.querySelector('.card-badge-new');
+            const dateStr = card.getAttribute('data-pubdate');
+            let date = new Date(0);
+            if (dateStr) {
+                const [day, month, year] = dateStr.split('/');
+                date = new Date(`${year}-${month}-${day}T00:00:00`);
             }
+            return { col, href, isRecommended, isNew, date };
+        }).filter(Boolean).filter(d => d.isRecommended || d.isNew);
+
+        cards.sort((a, b) => {
+            if (a.isRecommended !== b.isRecommended) {
+                return a.isRecommended ? -1 : 1;
+            }
+            return b.date - a.date;
+        });
+
+        const seen = new Set();
+        let added = 0;
+        for (const data of cards) {
+            if (added >= 4) break;
+            if (seen.has(data.href)) continue;
+            seen.add(data.href);
+            const clone = data.col.cloneNode(true);
+            heroGrid.appendChild(clone);
+            added++;
         }
 
         replacePlaceholderImages(heroGrid);
