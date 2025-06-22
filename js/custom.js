@@ -428,120 +428,38 @@
         });
     };
 
-    const populateHeroCarousel = () => {
-        const heroCarousel = document.getElementById('heroCarousel');
-        const carouselInner = heroCarousel ? heroCarousel.querySelector('.carousel-inner') : null;
-        const indicators = heroCarousel ? heroCarousel.querySelector('.carousel-indicators') : null;
-        const sourceCards = document.querySelectorAll('#articles .card');
-        if (!carouselInner || !sourceCards.length) return;
+    const populateHeroGrid = () => {
+        const heroGrid = document.getElementById('heroFeatured');
+        if (!heroGrid) return;
 
-        carouselInner.innerHTML = '';
-        if (indicators) indicators.innerHTML = '';
+        const sourceCols = document.querySelectorAll('#articles .col-md-6.col-lg-4');
+        heroGrid.innerHTML = '';
+        if (!sourceCols.length) return;
 
         const seen = new Set();
-        let slideIndex = 0;
-        sourceCards.forEach(card => {
+        let added = 0;
+        for (const col of sourceCols) {
+            if (added >= 4) break;
+            const card = col.querySelector('.card');
+            if (!card) continue;
             const link = card.querySelector('a[href]');
             const href = link ? link.getAttribute('href') : null;
-            if (href && seen.has(href)) return;
-            if (href) seen.add(href);
-
+            if (href && seen.has(href)) continue;
             const isRecommended = card.getAttribute('data-recommended') === 'true';
             const isNew = card.querySelector('.card-badge-new');
-
             if (isRecommended || isNew) {
-                const img = card.querySelector('img.card-img-top');
-                const titleEl = card.querySelector('.card-title');
-                const descEl = card.querySelector('.card-text');
-                const readTimeEl = card.querySelector('.reading-time');
-                const dateEl = card.querySelector('.article-date');
-                const authorEl = card.querySelector('[data-i18n="writtenBy"]');
-
-                const item = document.createElement('div');
-                item.className = 'carousel-item';
-                if (carouselInner.childElementCount === 0) item.classList.add('active');
-
-                if (img) {
-                    const imgClone = img.cloneNode();
-                    imgClone.className = 'd-block w-100 hero-slide-img';
-                    item.appendChild(imgClone);
-                }
-
-                const caption = document.createElement('div');
-                caption.className = 'carousel-caption d-md-block';
-
-                if (isRecommended || isNew) {
-                    const badge = document.createElement('span');
-                    badge.className = `badge ${isRecommended ? 'bg-success' : 'bg-danger'} me-2`;
-                    badge.setAttribute('data-i18n', isRecommended ? 'featuredArticles.recommended' : 'featuredArticles.new');
-                    badge.textContent = (typeof i18next !== 'undefined') ?
-                        i18next.t(isRecommended ? 'featuredArticles.recommended' : 'featuredArticles.new') :
-                        (isRecommended ? 'Consigliato' : 'Nuovo');
-                    caption.appendChild(badge);
-                }
-
-                if (titleEl) {
-                    const h5 = document.createElement('h5');
-                    h5.className = 'fw-bold';
-                    h5.textContent = titleEl.textContent;
-                    caption.appendChild(h5);
-                }
-
-                if (descEl) {
-                    const p = document.createElement('p');
-                    p.className = 'd-none d-sm-block';
-                    p.textContent = descEl.textContent;
-                    caption.appendChild(p);
-                }
-
-                if (readTimeEl) {
-                    const rt = readTimeEl.cloneNode(true);
-                    caption.appendChild(rt);
-                }
-
-                if (dateEl) {
-                    const dateClone = document.createElement('p');
-                    dateClone.className = 'text-muted small';
-                    dateClone.innerHTML = `<i class="bi bi-calendar me-1"></i> <span class="article-date">${dateEl.textContent}</span>`;
-                    caption.appendChild(dateClone);
-                }
-
-                if (authorEl) {
-                    const authorClone = document.createElement('p');
-                    authorClone.className = 'text-muted small';
-                    authorClone.innerHTML = `<i class="bi bi-person me-1"></i> ${authorEl.outerHTML}`;
-                    caption.appendChild(authorClone);
-                }
-
-                if (href) {
-                    const btn = document.createElement('a');
-                    btn.href = href;
-                    btn.className = 'btn btn-primary';
-                    btn.setAttribute('data-i18n', 'featuredArticles.readMore');
-                    btn.textContent = (typeof i18next !== 'undefined') ? i18next.t('featuredArticles.readMore') : 'Leggi di più';
-                    caption.appendChild(btn);
-                }
-
-                item.appendChild(caption);
-                carouselInner.appendChild(item);
-
-                if (indicators) {
-                    const indicator = document.createElement('button');
-                    indicator.type = 'button';
-                    indicator.setAttribute('data-bs-target', '#heroCarousel');
-                    indicator.setAttribute('data-bs-slide-to', String(slideIndex));
-                    indicator.setAttribute('aria-label', `Slide ${slideIndex + 1}`);
-                    if (slideIndex === 0) {
-                        indicator.className = 'active';
-                        indicator.setAttribute('aria-current', 'true');
-                    }
-                    indicators.appendChild(indicator);
-                    slideIndex++;
-                }
+                if (href) seen.add(href);
+                const clone = col.cloneNode(true);
+                heroGrid.appendChild(clone);
+                added++;
             }
-        });
+        }
 
-        replacePlaceholderImages(carouselInner);
+        replacePlaceholderImages(heroGrid);
+        setButtonColors(heroGrid);
+        updateCardReadingTimes(heroGrid);
+        updateRecommendedBadges(heroGrid);
+        updateNewBadges(heroGrid);
     };
 
     // Initial population in case the 'localized' event is not triggered
@@ -550,11 +468,11 @@
     fetchCardReadingTimesFromArticles();
     updateRecommendedBadges();
     updateNewBadges();
-    populateHeroCarousel();
+    populateHeroGrid();
 
     document.addEventListener('localized', () => {
         // Update dynamic data when translations are applied.
-        // Avoid repopulating the hero carousel here to prevent
+        // Avoid repopulating the hero grid here to prevent
         // a MutationObserver loop that causes cards to continually reload.
         updateArticleReadingTime();
         updateCardReadingTimes();
