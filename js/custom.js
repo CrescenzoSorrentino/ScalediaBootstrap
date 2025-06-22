@@ -429,115 +429,12 @@
     };
 
 
-    // Populate the hero carousel with cards marked as new or recommended
-    const populateHeroCarousel = () => {
-        const inner = document.getElementById('carouselExampleCaptionsInner');
-        const indicators = document.getElementById('carouselExampleCaptionsIndicators');
-        const section = document.getElementById('featured-carousel');
-        if (!inner) return;
-
-        const sourceCols = Array.from(document.querySelectorAll('#articles .col-md-6.col-lg-4'));
-        inner.innerHTML = '';
-        if (indicators) indicators.innerHTML = '';
-        if (!sourceCols.length) {
-            if (section) section.style.display = 'none';
-            return;
-        }
-
-        const cards = sourceCols.map(col => {
-            const card = col.querySelector('.card');
-            if (!card) return null;
-            const link = card.querySelector('a[href]');
-            const href = link ? link.getAttribute('href') : null;
-            if (!href) return null;
-            const isRecommended = card.getAttribute('data-recommended') === 'true';
-            const isNew = !!card.querySelector('.card-badge-new');
-            const dateStr = card.getAttribute('data-pubdate');
-            let date = new Date(0);
-            if (dateStr) {
-                const [day, month, year] = dateStr.split('/');
-                date = new Date(`${year}-${month}-${day}T00:00:00`);
-            }
-            return { card, href, isRecommended, isNew, date };
-        }).filter(Boolean).filter(d => d.isRecommended || d.isNew);
-
-        cards.sort((a, b) => {
-            if (a.isRecommended !== b.isRecommended) {
-                return a.isRecommended ? -1 : 1;
-            }
-            return b.date - a.date;
-        });
-
-        const seen = new Set();
-        let added = 0;
-        if (!cards.length) {
-            if (section) section.style.display = 'none';
-            return;
-        } else if (section) {
-            section.style.display = '';
-        }
-
-        for (const data of cards) {
-            if (added >= 3) break;
-            if (seen.has(data.href)) continue;
-            seen.add(data.href);
-
-            const item = document.createElement('div');
-            item.className = 'carousel-item' + (added === 0 ? ' active' : '');
-
-            const linkEl = document.createElement('a');
-            linkEl.href = data.href;
-
-            const img = data.card.querySelector('img');
-            if (img) {
-                const imgClone = img.cloneNode(true);
-                imgClone.classList.remove('card-img-top');
-                imgClone.classList.add('d-block', 'w-100');
-                linkEl.appendChild(imgClone);
-            }
-            item.appendChild(linkEl);
-
-            const caption = document.createElement('div');
-            caption.className = 'carousel-caption d-none d-md-block';
-            const title = data.card.querySelector('.card-title');
-            const desc = data.card.querySelector('.card-text');
-            if (title) {
-                const h5 = document.createElement('h5');
-                h5.innerHTML = title.innerHTML;
-                caption.appendChild(h5);
-            }
-            if (desc) {
-                const p = document.createElement('p');
-                p.innerHTML = desc.innerHTML;
-                caption.appendChild(p);
-            }
-            item.appendChild(caption);
-
-            inner.appendChild(item);
-
-            if (indicators) {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.setAttribute('data-bs-target', '#carouselExampleCaptions');
-                btn.setAttribute('data-bs-slide-to', String(added));
-                btn.setAttribute('aria-label', 'Slide ' + (added + 1));
-                if (added === 0) {
-                    btn.className = 'active';
-                    btn.setAttribute('aria-current', 'true');
-                }
-                indicators.appendChild(btn);
-            }
-            added++;
-        }
-    };
-
     // Initial population in case the 'localized' event is not triggered
     updateArticleReadingTime();
     updateCardReadingTimes();
     fetchCardReadingTimesFromArticles();
     updateRecommendedBadges();
     updateNewBadges();
-    populateHeroCarousel();
 
     document.addEventListener('localized', () => {
         // Update dynamic data when translations are applied.
@@ -546,8 +443,6 @@
         fetchCardReadingTimesFromArticles();
         updateRecommendedBadges();
         updateNewBadges();
-
-        populateHeroCarousel();
     });
     }
 
