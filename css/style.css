@@ -66,45 +66,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero Section */
 .hero-section {
-    /* Removed external placeholder image to reduce network requests */
-    background: linear-gradient(rgba(13, 110, 253, 0.85), rgba(10, 88, 202, 0.9));
-    background-size: cover;
-    background-position: center;
-    padding: 120px 0;
+    padding: 0;
     margin-bottom: 40px;
     position: relative;
     overflow: hidden;
-    z-index: 1;
 }
 
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    z-index: 0;
-}
-
-.hero-section::after {
-    content: '';
-    position: absolute;
-    bottom: -80px;
-    left: -80px;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    z-index: 0;
-}
-
-.hero-section .container {
-    position: relative;
-    z-index: 2;
-}
 
 .hero-section .btn {
     border-radius: 30px;
@@ -118,13 +85,22 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
-
-/* Hero image styling */
-.hero-section .hero-img {
-    max-width: 100%;
-    height: auto;
+/* Hero Carousel */
+.hero-carousel .carousel-item {
+    height: 60vh;
+    min-height: 300px;
+}
+.hero-carousel .hero-slide-img {
+    height: 100%;
+    object-fit: cover;
+}
+.hero-carousel .carousel-caption {
+    background: rgba(0,0,0,0.5);
+    border-radius: 0.5rem;
+    color: #fff;
 }
 
+/* Hero image styling */
 /* Card Styles and Hover Effects */
 .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -554,18 +530,6 @@ footer a:hover {
 }
 
 @media (max-width: 768px) {
-    .hero-section {
-        padding: 80px 0;
-    }
-
-
-    .hero-section h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero-section p.lead {
-        font-size: 1.1rem;
-    }
 
     .about-img-container {
         margin-bottom: 2rem;
@@ -600,14 +564,6 @@ footer a:hover {
 }
 
 @media (max-width: 576px) {
-    .hero-section {
-        padding: 60px 0;
-    }
-
-
-    .hero-section h1 {
-        font-size: 2rem;
-    }
 
     .section-title {
         font-size: 1.5rem;
