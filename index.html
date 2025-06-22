@@ -83,10 +83,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Hero Section */
 .hero-section {
     /* Removed external placeholder image to reduce network requests */
-    background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(10, 88, 202, 0.9));
+    background: linear-gradient(rgba(13, 110, 253, 0.85), rgba(10, 88, 202, 0.9));
     background-size: cover;
     background-position: center;
-    padding: 140px 0;
+    padding: 120px 0;
     margin-bottom: 40px;
     position: relative;
     overflow: hidden;
@@ -417,25 +417,31 @@ h1, h2, h3, h4, h5, h6 {
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero-section py-5 text-center text-white">
+    <section id="hero" class="hero-section text-white py-5">
         <div class="container">
-            <h1 class="display-3 fw-bold mb-3" data-i18n="hero.title">Trasforma le Tue Competenze Digitali</h1>
-            <p class="lead mb-4" data-i18n="hero.subtitle">Strategie pratiche, consigli esperti e guide dettagliate su Marketing, Finanza Personale e Programmazione per aiutarti a crescere professionalmente</p>
-            <div id="heroCarousel" class="carousel slide carousel-fade mb-4" data-bs-ride="carousel">
-                <div class="carousel-inner"><!-- slides populated by custom.js --></div>
-                <div class="carousel-indicators"></div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-2 order-lg-1 text-center text-lg-start">
+                    <h1 class="display-4 fw-bold mb-3" data-i18n="hero.title">Trasforma le Tue Competenze Digitali</h1>
+                    <p class="lead mb-4" data-i18n="hero.subtitle">Strategie pratiche, consigli esperti e guide dettagliate su Marketing, Finanza Personale e Programmazione per aiutarti a crescere professionalmente</p>
+                    <a href="#articles" class="btn btn-primary btn-lg d-inline-flex align-items-center"><i class="bi bi-search me-2"></i><span data-i18n="hero.cta">Scopri i Contenuti Esclusivi</span></a>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
+                    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <div class="carousel-inner"><!-- slides populated by custom.js --></div>
+                        <div class="carousel-indicators"></div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <a href="#articles" class="btn btn-primary btn-lg"><i class="bi bi-search me-2"></i><span data-i18n="hero.cta">Scopri i Contenuti Esclusivi</span></a>
         </div>
-    </header>
+    </section>
 
     <!-- About Me Section -->
     <section id="about" class="py-6 bg-light">

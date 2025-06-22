@@ -67,10 +67,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Hero Section */
 .hero-section {
     /* Removed external placeholder image to reduce network requests */
-    background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(10, 88, 202, 0.9));
+    background: linear-gradient(rgba(13, 110, 253, 0.85), rgba(10, 88, 202, 0.9));
     background-size: cover;
     background-position: center;
-    padding: 140px 0;
+    padding: 120px 0;
     margin-bottom: 40px;
     position: relative;
     overflow: hidden;
@@ -552,6 +552,10 @@ footer a:hover {
         padding: 80px 0;
     }
 
+    #heroCarousel .hero-slide-img {
+        height: 280px;
+    }
+
     .hero-section h1 {
         font-size: 2.5rem;
     }
@@ -595,6 +599,10 @@ footer a:hover {
 @media (max-width: 576px) {
     .hero-section {
         padding: 60px 0;
+    }
+
+    #heroCarousel .hero-slide-img {
+        height: 220px;
     }
 
     .hero-section h1 {
