@@ -429,15 +429,20 @@
     };
 
 
-    const populateCaptionsCarousel = () => {
+    // Populate the hero carousel with cards marked as new or recommended
+    const populateHeroCarousel = () => {
         const inner = document.getElementById('carouselExampleCaptionsInner');
         const indicators = document.getElementById('carouselExampleCaptionsIndicators');
+        const section = document.getElementById('featured-carousel');
         if (!inner) return;
 
         const sourceCols = Array.from(document.querySelectorAll('#articles .col-md-6.col-lg-4'));
         inner.innerHTML = '';
         if (indicators) indicators.innerHTML = '';
-        if (!sourceCols.length) return;
+        if (!sourceCols.length) {
+            if (section) section.style.display = 'none';
+            return;
+        }
 
         const cards = sourceCols.map(col => {
             const card = col.querySelector('.card');
@@ -465,6 +470,13 @@
 
         const seen = new Set();
         let added = 0;
+        if (!cards.length) {
+            if (section) section.style.display = 'none';
+            return;
+        } else if (section) {
+            section.style.display = '';
+        }
+
         for (const data of cards) {
             if (added >= 3) break;
             if (seen.has(data.href)) continue;
@@ -525,7 +537,7 @@
     fetchCardReadingTimesFromArticles();
     updateRecommendedBadges();
     updateNewBadges();
-    populateCaptionsCarousel();
+    populateHeroCarousel();
 
     document.addEventListener('localized', () => {
         // Update dynamic data when translations are applied.
@@ -535,7 +547,7 @@
         updateRecommendedBadges();
         updateNewBadges();
 
-        populateCaptionsCarousel();
+        populateHeroCarousel();
     });
     }
 
