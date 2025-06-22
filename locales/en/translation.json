@@ -13,6 +13,11 @@
     "finance": "Finance",
     "programming": "Programming"
   },
+  "hero": {
+    "title": "Welcome to Scaledia",
+    "subtitle": "Dive into marketing, personal finance and programming.",
+    "cta": "Read the articles"
+  },
   "about": {
     "title": "About Me",
     "intro": "Hello! I'm passionate about marketing, personal finance, and programming.",
