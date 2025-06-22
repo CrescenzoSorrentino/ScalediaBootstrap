@@ -697,9 +697,14 @@ footer a:hover {
 
 /* Hero Carousel */
 #featured-carousel {
-    background: linear-gradient(rgba(13,110,253,0.8), rgba(10,88,202,0.9));
-    background-size: cover;
-    background-position: center;
+    background: none;
+    position: relative;
+}
+
+#featured-carousel .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 1rem;
+    border-radius: 0.5rem;
 }
 
 #featured-carousel .carousel-item {
