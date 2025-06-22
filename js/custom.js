@@ -429,13 +429,17 @@
     };
 
     const populateHeroCarousel = () => {
-        const carouselInner = document.querySelector('#heroCarousel .carousel-inner');
+        const heroCarousel = document.getElementById('heroCarousel');
+        const carouselInner = heroCarousel ? heroCarousel.querySelector('.carousel-inner') : null;
+        const indicators = heroCarousel ? heroCarousel.querySelector('.carousel-indicators') : null;
         const sourceCards = document.querySelectorAll('#articles .card');
         if (!carouselInner || !sourceCards.length) return;
 
         carouselInner.innerHTML = '';
+        if (indicators) indicators.innerHTML = '';
 
         const seen = new Set();
+        let slideIndex = 0;
         sourceCards.forEach(card => {
             const link = card.querySelector('a[href]');
             const href = link ? link.getAttribute('href') : null;
@@ -498,6 +502,20 @@
 
                 item.appendChild(caption);
                 carouselInner.appendChild(item);
+
+                if (indicators) {
+                    const indicator = document.createElement('button');
+                    indicator.type = 'button';
+                    indicator.setAttribute('data-bs-target', '#heroCarousel');
+                    indicator.setAttribute('data-bs-slide-to', String(slideIndex));
+                    indicator.setAttribute('aria-label', `Slide ${slideIndex + 1}`);
+                    if (slideIndex === 0) {
+                        indicator.className = 'active';
+                        indicator.setAttribute('aria-current', 'true');
+                    }
+                    indicators.appendChild(indicator);
+                    slideIndex++;
+                }
             }
         });
 
