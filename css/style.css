@@ -696,6 +696,12 @@ footer a:hover {
 }
 
 /* Hero Carousel */
+#featured-carousel {
+    background: linear-gradient(rgba(13,110,253,0.8), rgba(10,88,202,0.9));
+    background-size: cover;
+    background-position: center;
+}
+
 #featured-carousel .carousel-item {
     height: 450px;
 }
