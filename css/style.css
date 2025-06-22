@@ -768,3 +768,18 @@ footer a:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
+
+/* Hero Carousel */
+#heroCarousel .hero-slide-img {
+    height: 320px;
+    object-fit: cover;
+}
+#heroCarousel .carousel-caption {
+    background: rgba(0,0,0,0.6);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+#heroCarousel .carousel-caption h5 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}

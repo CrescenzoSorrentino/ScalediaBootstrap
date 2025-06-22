@@ -421,6 +421,17 @@ h1, h2, h3, h4, h5, h6 {
         <div class="container">
             <h1 class="display-3 fw-bold mb-3" data-i18n="hero.title">Trasforma le Tue Competenze Digitali</h1>
             <p class="lead mb-4" data-i18n="hero.subtitle">Strategie pratiche, consigli esperti e guide dettagliate su Marketing, Finanza Personale e Programmazione per aiutarti a crescere professionalmente</p>
+            <div id="heroCarousel" class="carousel slide carousel-fade mb-4" data-bs-ride="carousel">
+                <div class="carousel-inner"><!-- slides populated by custom.js --></div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
             <a href="#articles" class="btn btn-primary btn-lg"><i class="bi bi-search me-2"></i><span data-i18n="hero.cta">Scopri i Contenuti Esclusivi</span></a>
         </div>
     </header>
@@ -448,70 +459,6 @@ h1, h2, h3, h4, h5, h6 {
         </div>
     </section>
 
-    <!-- New and Recommended Articles -->
-    <section id="featured-articles" class="py-6">
-        <div class="container">
-            <h2 class="text-center section-title mb-5"><i class="bi bi-star me-2"></i><span data-i18n="featuredArticles.title">Articoli Nuovi e Consigliati</span></h2>
-            <div class="row">
-                <!-- Credit Cards Article -->
-                <div class="col-md-6 col-lg-4 mb-4 px-3">
-                    <div class="card h-100" data-pubdate="20/06/2025" data-reading-time="4">
-                        <div class="card-badge card-badge-recommended" data-i18n="featuredArticles.recommended">Consigliato</div>
-                        <img src="images/placeholder.jpg" class="card-img-top" alt="Credit Cards Article" loading="lazy">
-                        <div class="card-body">
-                            <span class="badge bg-success mb-3" data-i18n="categories.finance">Finanza</span>
-                            <h5 class="card-title" data-i18n="cards.creditCards.title">Credit Cards</h5>
-                            <p class="card-text" data-i18n="cards.creditCards.description">Scopri tutto sulle carte di credito: vantaggi, svantaggi e come scegliere quella più adatta alle tue esigenze.</p>
-                            <p class="text-muted small reading-time"><i class="bi bi-clock me-1"></i> <span data-i18n="readingTime" data-i18n-options='{"time": "4"}'>Tempo di lettura: 4 min</span></p>
-                                    <p class="text-muted small"><i class="bi bi-calendar me-1"></i> <span class="article-date">20/06/2025</span></p>
-                                    <p class="text-muted small"><i class="bi bi-person me-1"></i> <span data-i18n="writtenBy" data-i18n-options='{"author": "Crescenzo Sorrentino"}'>Scritto da Crescenzo Sorrentino</span></p>
-                        </div>
-                        <div class="card-footer bg-white border-0">
-                            <a href="articles/credit-cards.html" class="btn btn-outline-success"><i class="bi bi-book me-1"></i> <span data-i18n="featuredArticles.readMore">Leggi di più</span></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Duolingo Case Study Article -->
-                <div class="col-md-6 col-lg-4 mb-4 px-3">
-                    <div class="card h-100" data-pubdate="20/06/2025" data-reading-time="5">
-                        <div class="card-badge card-badge-new" data-i18n="featuredArticles.new">Nuovo</div>
-                        <img src="images/duolingo-case-study.webp" class="card-img-top" alt="Duolingo Case Study Article" loading="lazy">
-                        <div class="card-body">
-                            <span class="badge bg-primary mb-3" data-i18n="categories.marketing">Marketing</span>
-                            <h5 class="card-title" data-i18n="cards.duolingoCase.title">Duolingo Case Study</h5>
-                            <p class="card-text" data-i18n="cards.duolingoCase.description">Un'analisi approfondita della strategia di marketing di Duolingo e come ha rivoluzionato l'apprendimento delle lingue.</p>
-                            <p class="text-muted small reading-time"><i class="bi bi-clock me-1"></i> <span data-i18n="readingTime" data-i18n-options='{"time": "5"}'>Tempo di lettura: 5 min</span></p>
-                                    <p class="text-muted small"><i class="bi bi-calendar me-1"></i> <span class="article-date">20/06/2025</span></p>
-                                    <p class="text-muted small"><i class="bi bi-person me-1"></i> <span data-i18n="writtenBy" data-i18n-options='{"author": "Crescenzo Sorrentino"}'>Scritto da Crescenzo Sorrentino</span></p>
-                        </div>
-                        <div class="card-footer bg-white border-0">
-                            <a href="articles/duolingo-case.html" class="btn btn-outline-primary"><i class="bi bi-book me-1"></i> <span data-i18n="featuredArticles.readMore">Leggi di più</span></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Marketing Glossary Article -->
-                <div class="col-md-6 col-lg-4 mb-4 px-3">
-                    <div class="card h-100" data-pubdate="20/06/2025" data-reading-time="7">
-                        <div class="card-badge card-badge-recommended" data-i18n="featuredArticles.recommended">Consigliato</div>
-                        <img src="images/placeholder.jpg" class="card-img-top" alt="Marketing Glossary Article" loading="lazy">
-                        <div class="card-body">
-                            <span class="badge bg-primary mb-3" data-i18n="categories.marketing">Marketing</span>
-                            <h5 class="card-title" data-i18n="cards.marketingGlossary.title">Marketing Glossary</h5>
-                            <p class="card-text" data-i18n="cards.marketingGlossary.description">Un glossario completo dei termini di marketing essenziali per professionisti e principianti.</p>
-                            <p class="text-muted small reading-time"><i class="bi bi-clock me-1"></i> <span data-i18n="readingTime" data-i18n-options='{"time": "7"}'>Tempo di lettura: 7 min</span></p>
-                                    <p class="text-muted small"><i class="bi bi-calendar me-1"></i> <span class="article-date">20/06/2025</span></p>
-                                    <p class="text-muted small"><i class="bi bi-person me-1"></i> <span data-i18n="writtenBy" data-i18n-options='{"author": "Crescenzo Sorrentino"}'>Scritto da Crescenzo Sorrentino</span></p>
-                        </div>
-                        <div class="card-footer bg-white border-0">
-                            <a href="articles/marketing-glossary.html" class="btn btn-outline-primary"><i class="bi bi-book me-1"></i> <span data-i18n="featuredArticles.readMore">Leggi di più</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Newsletter Section -->
     <section id="newsletter" class="py-6 bg-primary text-white">

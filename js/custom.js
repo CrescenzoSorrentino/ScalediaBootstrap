@@ -428,12 +428,12 @@
         });
     };
 
-    const populateFeaturedArticles = () => {
-        const featuredContainer = document.querySelector('#featured-articles .row');
+    const populateHeroCarousel = () => {
+        const carouselInner = document.querySelector('#heroCarousel .carousel-inner');
         const sourceCards = document.querySelectorAll('#articles .card');
-        if (!featuredContainer || !sourceCards.length) return;
+        if (!carouselInner || !sourceCards.length) return;
 
-        featuredContainer.innerHTML = '';
+        carouselInner.innerHTML = '';
 
         const seen = new Set();
         sourceCards.forEach(card => {
@@ -441,33 +441,67 @@
             const href = link ? link.getAttribute('href') : null;
             if (href && seen.has(href)) return;
             if (href) seen.add(href);
+
             const isRecommended = card.getAttribute('data-recommended') === 'true';
             const isNew = card.querySelector('.card-badge-new');
 
             if (isRecommended || isNew) {
-                const clone = card.cloneNode(true);
+                const img = card.querySelector('img.card-img-top');
+                const titleEl = card.querySelector('.card-title');
+                const descEl = card.querySelector('.card-text');
 
-                if (isRecommended && !clone.querySelector('.card-badge-recommended')) {
-                    const badge = document.createElement('div');
-                    badge.className = 'card-badge card-badge-recommended';
-                    badge.setAttribute('data-i18n', 'featuredArticles.recommended');
-                    badge.textContent = (typeof i18next !== 'undefined') ? i18next.t('featuredArticles.recommended') : 'Consigliato';
-                    clone.prepend(badge);
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                if (carouselInner.childElementCount === 0) item.classList.add('active');
+
+                if (img) {
+                    const imgClone = img.cloneNode();
+                    imgClone.className = 'd-block w-100 hero-slide-img';
+                    item.appendChild(imgClone);
                 }
 
-                const col = document.createElement('div');
-                col.className = 'col-md-6 col-lg-4 mb-4 px-3';
-                col.appendChild(clone);
-                featuredContainer.appendChild(col);
+                const caption = document.createElement('div');
+                caption.className = 'carousel-caption d-md-block';
+
+                if (isRecommended || isNew) {
+                    const badge = document.createElement('span');
+                    badge.className = `badge ${isRecommended ? 'bg-success' : 'bg-danger'} me-2`;
+                    badge.setAttribute('data-i18n', isRecommended ? 'featuredArticles.recommended' : 'featuredArticles.new');
+                    badge.textContent = (typeof i18next !== 'undefined') ?
+                        i18next.t(isRecommended ? 'featuredArticles.recommended' : 'featuredArticles.new') :
+                        (isRecommended ? 'Consigliato' : 'Nuovo');
+                    caption.appendChild(badge);
+                }
+
+                if (titleEl) {
+                    const h5 = document.createElement('h5');
+                    h5.className = 'fw-bold';
+                    h5.textContent = titleEl.textContent;
+                    caption.appendChild(h5);
+                }
+
+                if (descEl) {
+                    const p = document.createElement('p');
+                    p.className = 'd-none d-sm-block';
+                    p.textContent = descEl.textContent;
+                    caption.appendChild(p);
+                }
+
+                if (href) {
+                    const btn = document.createElement('a');
+                    btn.href = href;
+                    btn.className = 'btn btn-primary';
+                    btn.setAttribute('data-i18n', 'featuredArticles.readMore');
+                    btn.textContent = (typeof i18next !== 'undefined') ? i18next.t('featuredArticles.readMore') : 'Leggi di più';
+                    caption.appendChild(btn);
+                }
+
+                item.appendChild(caption);
+                carouselInner.appendChild(item);
             }
         });
 
-        setButtonColors(featuredContainer);
-        replacePlaceholderImages(featuredContainer);
-        updateCardReadingTimes(featuredContainer);
-        fetchCardReadingTimesFromArticles(featuredContainer);
-        updateNewBadges(featuredContainer);
-        animateCards();
+        replacePlaceholderImages(carouselInner);
     };
 
     // Initial population in case the 'localized' event is not triggered
@@ -476,11 +510,11 @@
     fetchCardReadingTimesFromArticles();
     updateRecommendedBadges();
     updateNewBadges();
-    populateFeaturedArticles();
+    populateHeroCarousel();
 
     document.addEventListener('localized', () => {
         // Update dynamic data when translations are applied.
-        // Avoid repopulating the "featured" section here to prevent
+        // Avoid repopulating the hero carousel here to prevent
         // a MutationObserver loop that causes cards to continually reload.
         updateArticleReadingTime();
         updateCardReadingTimes();
