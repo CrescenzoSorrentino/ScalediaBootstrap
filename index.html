@@ -380,13 +380,18 @@ h1, h2, h3, h4, h5, h6 {
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero-section">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h1 class="hero-title" data-i18n="featuredArticles.title">Articoli Nuovi e Consigliati</h1>
-            </div>
-            <div class="row g-4" id="heroFeatured"></div>
+    <!-- Hero Carousel -->
+    <section id="hero" class="hero-carousel">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="heroCarouselInner"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </section>
 

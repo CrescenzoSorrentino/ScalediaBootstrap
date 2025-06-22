@@ -428,12 +428,12 @@
         });
     };
 
-    const populateHeroGrid = () => {
-        const heroGrid = document.getElementById('heroFeatured');
-        if (!heroGrid) return;
+    const populateHeroCarousel = () => {
+        const carouselInner = document.getElementById('heroCarouselInner');
+        if (!carouselInner) return;
 
         const sourceCols = Array.from(document.querySelectorAll('#articles .col-md-6.col-lg-4'));
-        heroGrid.innerHTML = '';
+        carouselInner.innerHTML = '';
         if (!sourceCols.length) return;
 
         const cards = sourceCols.map(col => {
@@ -467,15 +467,18 @@
             if (seen.has(data.href)) continue;
             seen.add(data.href);
             const clone = data.col.cloneNode(true);
-            heroGrid.appendChild(clone);
+            const item = document.createElement('div');
+            item.className = 'carousel-item' + (added === 0 ? ' active' : '');
+            item.appendChild(clone);
+            carouselInner.appendChild(item);
             added++;
         }
 
-        replacePlaceholderImages(heroGrid);
-        setButtonColors(heroGrid);
-        updateCardReadingTimes(heroGrid);
-        updateRecommendedBadges(heroGrid);
-        updateNewBadges(heroGrid);
+        replacePlaceholderImages(carouselInner);
+        setButtonColors(carouselInner);
+        updateCardReadingTimes(carouselInner);
+        updateRecommendedBadges(carouselInner);
+        updateNewBadges(carouselInner);
     };
 
     // Initial population in case the 'localized' event is not triggered
@@ -484,7 +487,7 @@
     fetchCardReadingTimesFromArticles();
     updateRecommendedBadges();
     updateNewBadges();
-    populateHeroGrid();
+    populateHeroCarousel();
 
     document.addEventListener('localized', () => {
         // Update dynamic data when translations are applied.
@@ -494,9 +497,9 @@
         updateRecommendedBadges();
         updateNewBadges();
 
-        // Repopulate the hero grid after localization to ensure
+        // Repopulate the hero carousel after localization to ensure
         // translated cards remain visible.
-        populateHeroGrid();
+        populateHeroCarousel();
     });
     }
 
