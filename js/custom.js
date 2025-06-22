@@ -488,13 +488,15 @@
 
     document.addEventListener('localized', () => {
         // Update dynamic data when translations are applied.
-        // Avoid repopulating the hero grid here to prevent
-        // a MutationObserver loop that causes cards to continually reload.
         updateArticleReadingTime();
         updateCardReadingTimes();
         fetchCardReadingTimesFromArticles();
         updateRecommendedBadges();
         updateNewBadges();
+
+        // Repopulate the hero grid after localization to ensure
+        // translated cards remain visible.
+        populateHeroGrid();
     });
     }
 
