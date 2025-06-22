@@ -66,86 +66,20 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero Section */
 .hero-section {
-    /* Removed external placeholder image to reduce network requests */
-    background: linear-gradient(rgba(13, 110, 253, 0.85), rgba(10, 88, 202, 0.9));
-    background-size: cover;
-    background-position: center;
-    padding: 120px 0;
+    background-color: #fff;
+    padding: 80px 0;
     margin-bottom: 40px;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
 }
 
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    z-index: 0;
-}
-
-.hero-section::after {
-    content: '';
-    position: absolute;
-    bottom: -80px;
-    left: -80px;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    z-index: 0;
-}
-
-.hero-section .container {
-    position: relative;
-    z-index: 2;
-}
-
-.hero-section .btn {
-    border-radius: 30px;
-    padding: 12px 30px;
-    font-weight: 500;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-}
-
-.hero-section .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Hero image styling */
-.hero-section .hero-img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Hero Carousel */
-.hero-carousel {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.hero-carousel .carousel-caption {
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 12px;
-    padding: 1rem;
-}
-
-.hero-carousel .carousel-item img {
-    border-radius: 12px;
-    height: 400px;
-    object-fit: cover;
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #212529;
 }
 
 @media (max-width: 768px) {
-    .hero-carousel .carousel-item img {
-        height: 250px;
+    .hero-title {
+        font-size: 2rem;
     }
 }
 
@@ -583,7 +517,7 @@ footer a:hover {
     }
 
 
-    .hero-section h1 {
+    .hero-title {
         font-size: 2.5rem;
     }
 
@@ -629,7 +563,7 @@ footer a:hover {
     }
 
 
-    .hero-section h1 {
+    .hero-title {
         font-size: 2rem;
     }
 
