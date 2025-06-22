@@ -71,6 +71,7 @@
   },
   "backToTop": "Back to Top",
   "readingTime": "Reading time: {{time}} min",
+  "writtenBy": "Written by {{author}}",
   "notFound": {
     "title": "Page Not Found",
     "message": "Sorry, the page you are looking for doesn't exist.",
