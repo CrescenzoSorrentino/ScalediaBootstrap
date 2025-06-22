@@ -382,122 +382,18 @@ h1, h2, h3, h4, h5, h6 {
 
     <!-- Hero Carousel -->
     <section id="hero" class="hero-carousel">
-        <!-- Credit Cards Article -->
-        <article class="slide active" style="background-image:url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1920&q=80');">
-            <div class="overlay">
-                <span class="meta">Finanza · 20 giu 2025</span>
-                <h2>Carte di Credito</h2>
-                <p>La tua relazione tossica preferita: tu, la tua carta di credito e il tuo conto in banca!</p>
-                <a href="articles/credit-cards.html" class="btn">Leggi di più</a>
-            </div>
-        </article>
-
-        <!-- Duolingo Case Study -->
-        <article class="slide" style="background-image:url('https://images.unsplash.com/photo-1621274147744-cfb5032bb7a0?auto=format&fit=crop&w=1920&q=80');">
-            <div class="overlay">
-                <span class="meta">Marketing · 20 giu 2025</span>
-                <h2>Caso Studio Duolingo</h2>
-                <p>Come un gufo verde ha conquistato il mondo (e perché dovresti prendere appunti)</p>
-                <a href="articles/duolingo-case.html" class="btn">Leggi di più</a>
-            </div>
-        </article>
-
-        <!-- AB Test Article -->
-        <article class="slide" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&q=80');">
-            <div class="overlay">
-                <span class="meta">Marketing · 20 giu 2025</span>
-                <h2>Test A/B</h2>
-                <p>Quando l'indecisione diventa una strategia di marketing (e funziona pure!)</p>
-                <a href="articles/ab-test.html" class="btn">Leggi di più</a>
-            </div>
-        </article>
-
-        <!-- AIDA Model Article -->
-        <article class="slide" style="background-image:url('https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=1920&q=80');">
-            <div class="overlay">
-                <span class="meta">Marketing · 20 giu 2025</span>
-                <h2>Modello AIDA</h2>
-                <p>La formula segreta per vendere qualsiasi cosa (anche a tua suocera)</p>
-                <a href="articles/aida-model.html" class="btn">Leggi di più</a>
-            </div>
-        </article>
-
-        <!-- Marketing Glossary Article -->
-        <article class="slide" style="background-image:url('https://images.unsplash.com/photo-1493612276216-ee3925520721?auto=format&fit=crop&w=1920&q=80');">
-            <div class="overlay">
-                <span class="meta">Marketing · 20 giu 2025</span>
-                <h2>Glossario di Marketing</h2>
-                <p>Perché fingere di capire i termini di marketing quando puoi davvero impararli (e fare la figura dell'esperto)</p>
-                <a href="articles/marketing-glossary.html" class="btn">Leggi di più</a>
-            </div>
-        </article>
-
-        <button class="nav-btn nav-prev" aria-label="Precedente">&#10094;</button>
-        <button class="nav-btn nav-next" aria-label="Successivo">&#10095;</button>
-
-        <div class="dots"></div>
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="heroCarouselInner"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </section>
-
-    <script>
-        const hero      = document.getElementById('hero');
-        const slides    = hero.querySelectorAll('.slide');
-        const prevBtn   = hero.querySelector('.nav-prev');
-        const nextBtn   = hero.querySelector('.nav-next');
-        const dotsBox   = hero.querySelector('.dots');
-        let   index     = 0;
-        const interval  = 7000;
-        let   timer;
-
-        slides.forEach((_, i) => {
-            const dot = document.createElement('span');
-            dot.className = 'dot' + (i === 0 ? ' active' : '');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsBox.appendChild(dot);
-        });
-        const dots = dotsBox.querySelectorAll('.dot');
-
-        function showSlide(n) {
-            slides.forEach((s, i) => {
-                s.classList.toggle('active', i === n);
-                dots[i].classList.toggle('active', i === n);
-            });
-            index = n;
-        }
-
-        function nextSlide() {
-            const next = (index + 1) % slides.length;
-            showSlide(next);
-        }
-
-        function prevSlide() {
-            const prev = (index - 1 + slides.length) % slides.length;
-            showSlide(prev);
-        }
-
-        function goToSlide(n) {
-            showSlide(n);
-            resetTimer();
-        }
-
-        function startTimer() {
-            timer = setInterval(nextSlide, interval);
-        }
-        function resetTimer() {
-            clearInterval(timer);
-            startTimer();
-        }
-
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-            resetTimer();
-        });
-        prevBtn.addEventListener('click', () => {
-            prevSlide();
-            resetTimer();
-        });
-
-        startTimer();
-    </script>
 
     <!-- About Me Section -->
     <section id="about" class="py-6 bg-light">
